@@ -9,6 +9,7 @@ class Model : public QObject{
 private:
     Container<deepPtr<veicolo>> *veicoli;
 
+
 public:
     Model();
 

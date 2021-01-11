@@ -1,10 +1,11 @@
 #include "container.h"
 
 template<class T>
-Container<T>::constIteratore::constIteratore(deepPtr<T> * p) : puntatore(p) {}
+Container<T>::constIteratore::constIteratore(nodo * p, bool pte) :
+    puntatore(p),past_the_end(pte) {}
 
 template<class T>
-Container<T>::constIteratore::constIteratore() : puntatore(nullptr) {}
+Container<T>::constIteratore::constIteratore() : puntatore(nullptr), past_the_end(false){}
 
 template<class T>
 typename Container<T>::constIteratore & Container<T>::constIteratore::operator=(const constIteratore & cit)
@@ -16,17 +17,26 @@ typename Container<T>::constIteratore & Container<T>::constIteratore::operator=(
 template<class T>
 typename Container<T>::constIteratore& Container<T>::constIteratore::operator++()
 {
-    if(puntatore) puntatore=puntatore->next;
+    if(puntatore!= nullptr){
+        if(!past_the_end){
+            if(puntatore->next != nullptr) {puntatore = puntatore->next;}
+         else { puntatore = puntatore+1; past_the_end = true; }
+         }
+    }
     return *this;
 
 }
 template<class T>
 typename Container<T>::constIteratore& Container<T>::constIteratore::operator++(int)
 {
-    Iteratore aux=*this;
-    if(puntatore) puntatore=puntatore->next;
-    return aux;
-
+    constIteratore aux(*this);
+        if(puntatore!= nullptr) {
+            if(!past_the_end) {
+                if(puntatore->next != nullptr) puntatore = puntatore->next;
+                else {puntatore = puntatore+1; past_the_end = true;}
+            }
+        }
+        return aux;
 }
 
 template<class T>
@@ -53,8 +63,33 @@ bool Container<T>::constIteratore::operator!=(const constIteratore& cit)
     return puntatore != cit.puntatore;
 }
 
+
 template<class T>
-Container<T>::Iteratore::Iteratore(deepPtr<T> * p) : puntatore(p) {}
+typename Container<T>::constIteratore Container<T>::inizio() const
+{
+    return constIteratore(primo);
+}
+
+template<class T>
+typename Container<T>::constIteratore Container<T>::fine() const
+{
+    return constIteratore(ultimo);
+}
+
+template<class T>
+typename Container<T>::Iteratore Container<T>::inizio()
+{
+    return Iteratore(primo);
+}
+
+template<class T>
+typename Container<T>::Iteratore Container<T>::fine()
+{
+    return Iteratore(ultimo);
+}
+
+template<class T>
+Container<T>::Iteratore::Iteratore(nodo * p) : puntatore(p) {}
 
 template<class T>
 Container<T>::Iteratore::Iteratore() : puntatore(nullptr) {}
@@ -69,16 +104,26 @@ typename Container<T>::Iteratore & Container<T>::Iteratore::operator=(const Iter
 template<class T>
 typename Container<T>::Iteratore& Container<T>::Iteratore::operator++()
 {
-    if(puntatore) puntatore=puntatore->next;
+    if(puntatore!= nullptr){
+        if(!past_the_end){
+            if(puntatore->next != nullptr) {puntatore = puntatore->next;}
+         else { puntatore = puntatore+1; past_the_end = true; }
+         }
+    }
     return *this;
 
 }
 template<class T>
 typename Container<T>::Iteratore& Container<T>::Iteratore::operator++(int)
 {
-    Iteratore aux=*this;
-    if(puntatore) puntatore=puntatore->next;
-    return aux;
+    constIteratore aux(*this);
+        if(puntatore!= nullptr) {
+            if(!past_the_end) {
+                if(puntatore->next != nullptr) puntatore = puntatore->next;
+                else {puntatore = puntatore+1; past_the_end = true;}
+            }
+        }
+        return aux;
 
 }
 

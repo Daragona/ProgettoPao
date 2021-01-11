@@ -8,6 +8,18 @@ template <class T>
 class Container
 {
 private:
+    class nodo {
+        friend class Container<T>;
+    private:
+        T info;
+        nodo* next;
+        nodo(const T&, nodo* = nullptr);
+        nodo(const nodo&);
+        void distruggi();
+    };
+    nodo* primo, *ultimo;
+    static nodo* clone(nodo*, nodo*&);
+
 
 
 public:
@@ -17,13 +29,13 @@ public:
     ~Container();
     Container& operator=(const Container&);
 
-
     class constIteratore
     {
         friend class Container<T>;
     private:
-        const deepPtr<T>* puntatore;
-        constIteratore(deepPtr<T>*);
+        const nodo* puntatore;
+        bool past_the_end;
+        constIteratore(nodo*, bool pte=0);
     public:
         constIteratore();
         constIteratore& operator=(const constIteratore&);
@@ -39,8 +51,9 @@ public:
     class Iteratore{
         friend Container<T>;
     private:
-        deepPtr<T> * puntatore;
-        Iteratore(deepPtr <T>*);
+        nodo * puntatore;
+        bool past_the_end;
+        Iteratore(nodo*);
     public:
         Iteratore();
         Iteratore& operator=(const Iteratore&);
