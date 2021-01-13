@@ -1,14 +1,15 @@
 #include "bmx.h"
 
-bmx::bmx(bool pad_):Pad(pad_){
+bmx::bmx(string Sella_, string Corona_, double diamRuote_, string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_,bool pad_):
+    bicicletta(Sella_,Corona_,diamRuote_,Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_),
+    Pad(pad_){}
 
-}
 
 bool bmx::hasPad(){
     return Pad;
 }
 
-double bmx::calcolaTax()const{
+double bmx::calcolaTax(){
     return Price*0.90;
 }
 

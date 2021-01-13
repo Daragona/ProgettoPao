@@ -5,7 +5,7 @@
 using std::string;
 
 class veicolo{
-protected:
+public:
     string Marca;
     string Modello;
     string Telaio;
@@ -19,7 +19,8 @@ public:
     veicolo();
     virtual void GetInfo() const =0;
     virtual void chiediRicambio()=0;
-    virtual double calcolaTax() const =0;
+    virtual double calcolaTax() =0;
+    virtual ~veicolo()=default;
 
     void changeQuantity(int);
     void changePrice(double);

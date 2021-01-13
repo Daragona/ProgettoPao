@@ -4,9 +4,9 @@
 #include "veicoloelettrico.h"
 #include "monopattino.h"
 
-class monopattinoElettrico: virtual public monopattino, virtual public veicoloElettrico
+class monopattinoElettrico: public monopattino, public veicoloElettrico
 {
-private:
+public:
     string accelleratore;
 public:
     monopattinoElettrico(string a);

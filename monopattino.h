@@ -6,8 +6,8 @@
 
 using std::string;
 
-class monopattino : public Veicolo {
-private:
+class monopattino : virtual public veicolo {
+public:
     string deck;
     string collarinoDiChiusura;
     string gripTape;

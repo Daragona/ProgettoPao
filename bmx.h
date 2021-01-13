@@ -2,14 +2,14 @@
 #define BMX_H
 #include "bicicletta.h"
 
-class bmx:protected bicicletta{
-protected:
+class bmx: public bicicletta{
+public:
     bool Pad;
 public:
-    bmx(bool);
+    bmx(string, string, double, string,string, string, string,double, int, bool,bool);
     bmx();
     bool hasPad();
-    double calcolaTax()const override;
+    double calcolaTax() override;
 
 };
 

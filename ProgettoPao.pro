@@ -19,6 +19,9 @@ SOURCES += \
     model.cpp \
     mountainbike.cpp \
     veicolo.cpp \
+    monopattino.cpp \
+    monopattinoelettrico.cpp \
+    veicoloelettrico.cpp \
     view.cpp
 
 HEADERS += \
@@ -31,6 +34,9 @@ HEADERS += \
     model.h \
     mountainbike.h \
     veicolo.h \
+    monopattino.h \
+    monopattinoelettrico.h \
+    veicoloelettrico.h \
     view.h
 
 FORMS += \

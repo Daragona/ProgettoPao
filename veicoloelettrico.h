@@ -3,7 +3,7 @@
 
 #include "veicolo.h"
 
-class veicoloElettrico : public Veicolo{
+class veicoloElettrico : virtual public veicolo{
 private:
     int Watt;
     double ampere;
