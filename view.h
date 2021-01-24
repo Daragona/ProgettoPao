@@ -20,6 +20,10 @@ private:
 
     void itemsList(QGridLayout* screenLayout);
 
+    void showMoreInfo();
+
+    void createItem(QVBoxLayout* veicoloLayout,QVBoxLayout* veicoloElettricoLayout);
+
 public:
     explicit view(QWidget *parent = nullptr);
 

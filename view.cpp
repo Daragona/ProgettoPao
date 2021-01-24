@@ -1,6 +1,6 @@
 #include "view.h"
-#include "ui_view.h"
 
+//MAIN ---------------
 view::view(QWidget *parent): QWidget(parent) {
 
     QGridLayout* screenLayout = new QGridLayout; //Layout centrale del programma
@@ -29,7 +29,7 @@ view::view(QWidget *parent): QWidget(parent) {
     setLayout(screenLayout);
     resize(QSize(1024, 720));
 
-    showInsertDialog();
+    //showInsertDialog();
 
 }
 
@@ -39,35 +39,46 @@ view::view(QWidget *parent): QWidget(parent) {
 
 void view::itemsList(QGridLayout* screenLayout)
 {
-    QLabel* titoloBici = new QLabel;
-    QLabel* titoloMonopattino = new QLabel;
+    QLabel* titoloVeicolo = new QLabel;
+    QLabel* titoloVeicoloElettrico = new QLabel;
 
-    titoloBici->setText("BICI");
-    titoloMonopattino->setText("MONOPATTINO ELETTRICO");
+    titoloVeicolo->setText("VEICOLO");
+    titoloVeicoloElettrico->setText("VEICOLO ELETTRICO");
 
     // i due box che contengono uno le bici e uno i monopattini
-    QVBoxLayout* biciLayout = new QVBoxLayout;
-    QVBoxLayout* monopattinoLayout = new QVBoxLayout;
+    QVBoxLayout* veicoloLayout = new QVBoxLayout;
+    QVBoxLayout* veicoloElettricoLayout = new QVBoxLayout;
 
-    QFrame* biciList = new QFrame;
-    QFrame* monopattinoList = new QFrame;
+    QFrame* veicoloList = new QFrame;
+    QFrame* veicoloElettricoList = new QFrame;
 
-    biciLayout->addWidget(titoloBici);
-    monopattinoLayout->addWidget(titoloMonopattino);
+    veicoloLayout->addWidget(titoloVeicolo);
+    veicoloElettricoLayout->addWidget(titoloVeicoloElettrico);
 
-    biciList->setLayout(biciLayout);
-    monopattinoList->setLayout(monopattinoLayout);
-
-
-    biciList->setStyleSheet("background-color:white; border:1px solid black");
-    monopattinoList->setStyleSheet("background-color:white;border:1px solid black");
-
-    screenLayout->addWidget(titoloBici,1,0);
-    screenLayout->addWidget(titoloMonopattino,1,1);
+    veicoloList->setLayout(veicoloLayout);
+    veicoloElettricoList->setLayout(veicoloElettricoLayout);
 
 
-    // OGGETTO ITEM
+    veicoloList->setStyleSheet("background-color:white; border:1px solid black");
+    veicoloElettricoList->setStyleSheet("background-color:white;border:1px solid black");
 
+    screenLayout->addWidget(titoloVeicolo,1,0);
+    screenLayout->addWidget(titoloVeicoloElettrico,1,1);
+
+    for(int i = 0; i < 9; i++)
+        createItem(veicoloLayout, veicoloElettricoLayout); // creazione dell'item
+
+    //showMoreInfo();
+
+
+    screenLayout->addWidget(veicoloList,2,0);
+    screenLayout->addWidget(veicoloElettricoList,2,1);
+
+}
+
+// metodo per la creazione dell'oggetto
+void view::createItem(QVBoxLayout* veicoloLayout, QVBoxLayout* veicoloElettricoLayout)
+{
     QFrame* item = new QFrame;
     QGridLayout* itemLayout = new QGridLayout; //Layout centrale del programma
 
@@ -93,25 +104,49 @@ void view::itemsList(QGridLayout* screenLayout)
 
     item->setLayout(itemLayout);
 
+    veicoloLayout->addWidget(item);
+}
+
+// finestra che si apre quando clicchi il pulsante more info sul singolo item
+void view::showMoreInfo()
+{
+    QDialog* moreInfo = new QDialog(this);
+
+    QVBoxLayout* moreInfoLayout = new QVBoxLayout();
+
+    QLabel* dettagliMezzo = new QLabel;
+    dettagliMezzo-> setText("Dettagli mezzo");
+
+    // qua ci va la lista
+
+    moreInfoLayout->addWidget(dettagliMezzo);
+
+    // anzichè avere l'array avremo la nostra classe container
+
+    for(int i = 0; i < 9 ; i++){
+        QLabel* prova = new QLabel;
+        prova-> setText("item");
+        moreInfoLayout->addWidget(prova);
+    }
 
 
-    biciLayout->addWidget(item);
-
-    screenLayout->addWidget(biciList,2,0);
-    screenLayout->addWidget(monopattinoList,2,1);
+    moreInfo->resize(400,600);
+    moreInfo->setLayout(moreInfoLayout);
+    moreInfo->show();
 }
 
 // quando clicchi sul bottone inserisci
 void view::showInsertDialog()
 {
-    QDialog* insertDialog = new QDialog(this);
+    QWizardPage *page = new QWizardPage;
+    page->setTitle("Introduction");
 
-    QVBoxLayout* insertDialogLayout = new QVBoxLayout();
 
-    QLabel* inserimentoMezzo = new QLabel;
-    inserimentoMezzo-> setText("Inserimento mezzo");
 
-    insertDialogLayout->addWidget(inserimentoMezzo);
+    QVBoxLayout *insertDialogLayout = new QVBoxLayout;
+
+    QLabel* selectTypeLabel = new QLabel("Scegli il tipo di mezzo che vuoi inserire:");
+    insertDialogLayout->addWidget(selectTypeLabel);
 
     QRadioButton *eBikeButton = new QRadioButton("e-Bike", this);
     QRadioButton *monopattinoElettricoButton = new QRadioButton("Monopattino Elettrico", this);
@@ -123,37 +158,46 @@ void view::showInsertDialog()
     insertDialogLayout->addWidget(BMXButton);
     insertDialogLayout->addWidget(mountainBikeButton);
 
-
-
-    insertDialog->setModal(true);
-    insertDialog->setLayout(insertDialogLayout);
-
-    insertDialog->resize(500,200);
-    insertDialog->show();
-
- /*   QWizardPage *page = new QWizardPage;
-    page->setTitle("Introduction");
-
-    QLabel *label = new QLabel("This wizard will help you register your copy of Super Product Two.");
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(label);
-    page->setLayout(layout);
-
     QWizardPage *page2 = new QWizardPage;
     page->setTitle("Introduction");
 
-    label->setWordWrap(true);
-    layout->addWidget(label);
-    page->setLayout(layout);
+
+    page->setLayout(insertDialogLayout);
+
+     QWizard* wizard = new QWizard;
+     wizard->addPage(page);
+     wizard->addPage(page2);
+
+     wizard->show();
+
+     //Qui sotto un alternativa ma non so come implementare il pulsante next
+
+     /*QDialog* insertDialog = new QDialog(this);
+
+     QVBoxLayout* insertDialogLayout = new QVBoxLayout();
+
+     QLabel* inserimentoMezzo = new QLabel;
+     inserimentoMezzo-> setText("Inserimento mezzo");
+
+     insertDialogLayout->addWidget(inserimentoMezzo);
+
+     QRadioButton *eBikeButton = new QRadioButton("e-Bike", this);
+     QRadioButton *monopattinoElettricoButton = new QRadioButton("Monopattino Elettrico", this);
+     QRadioButton *BMXButton = new QRadioButton("BMX", this);
+     QRadioButton *mountainBikeButton = new QRadioButton("Mountain-Bike", this);
+
+     insertDialogLayout->addWidget(eBikeButton);
+     insertDialogLayout->addWidget(monopattinoElettricoButton);
+     insertDialogLayout->addWidget(BMXButton);
+     insertDialogLayout->addWidget(mountainBikeButton);
 
 
-     QWizard wizard;
-     wizard.addPage(page);
-     wizard.addPage(page2);
 
-     wizard.show();
-     */
+     insertDialog->setModal(true);
+     insertDialog->setLayout(insertDialogLayout);
+
+     insertDialog->resize(500,200);
+     insertDialog->show();*/
 
 }
 
