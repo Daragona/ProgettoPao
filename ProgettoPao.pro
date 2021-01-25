@@ -18,6 +18,7 @@ SOURCES += \
     mainwindow.cpp \
     model.cpp \
     mountainbike.cpp \
+    tempoview.cpp \
     veicolo.cpp \
     monopattino.cpp \
     monopattinoelettrico.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     mainwindow.h \
     model.h \
     mountainbike.h \
+    tempoview.h \
     veicolo.h \
     monopattino.h \
     monopattinoelettrico.h \
