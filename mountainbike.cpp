@@ -16,6 +16,15 @@ string mountainbike::getAmmortizzatori(){
     return Ammortizzatori;
 }
 
+
+
+void mountainbike::GetInfo() const{
+
+};
+void mountainbike::chiediRicambio(){
+
+};
+
 double mountainbike::calcolaTax(){
     return Price*0.90;
 }

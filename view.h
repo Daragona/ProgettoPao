@@ -35,10 +35,12 @@ private:
     void showMoreInfo();
 
     void createItem(QVBoxLayout* veicoloLayout,QVBoxLayout* veicoloElettricoLayout);
+
 public:
     explicit view(QWidget *parent = nullptr);
 
 public slots:
+    void importMezzi();
     void showInsertDialog();
 };
 #endif // VIEW_H

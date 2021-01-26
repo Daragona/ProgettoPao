@@ -1,0 +1,32 @@
+{
+"arrayMezzi" : [{
+      "tipo" : "mountainbike",
+      "Sella": "Sella",
+      "Corona": "Corona",
+      "diamRuote": 12.2,
+      "Marca": "Marca",
+      "Modello": "Modello",
+      "Telaio": "Telaio",
+      "Manubrio": "Manubrio",
+      "Price": 650.50,
+      "Quantity": 4, 
+      "Used": 0,
+      "numMarce": 5,
+      "Ammortizzatori": "Ammortizzatori"
+   },
+   {
+      "tipo" : "bmx",
+      "Sella": "Sella",
+      "Corona": "Corona",
+      "diamRuote": 12.2,
+      "Marca": "Marca",
+      "Modello": "Modello",
+      "Telaio": "Telaio",
+      "Manubrio": "Manubrio",
+      "Price": 650.50,
+      "Quantity": 4, 
+      "Used": 0,
+      "pad": "PAD bmx"
+   }]
+
+}

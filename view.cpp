@@ -1,6 +1,16 @@
 #include "view.h"
+#include "mountainbike.h"
+#include <QMessageBox>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QVariantMap>
+#include <QTextStream>
+#include <QJsonArray>
+#include <typeinfo>
 
 //MAIN ---------------
+
 view::view(QWidget *parent): QWidget(parent) {
 
     QGridLayout* screenLayout = new QGridLayout; //Layout centrale del programma
@@ -27,6 +37,17 @@ view::view(QWidget *parent): QWidget(parent) {
 
     screenLayout->addWidget(Usato,3,0);
     screenLayout->addWidget(Inserisci,3,1);
+
+
+    QPushButton *Importa = new QPushButton("&Importa", this);
+
+    connect(Importa, &QPushButton::released, this, &view::importMezzi);
+
+    screenLayout->addWidget(Importa,1,3);
+
+
+
+
 
 
     setLayout(screenLayout);
@@ -145,3 +166,67 @@ void view::showInsertDialog(){
     wdg->show();
 
 }
+
+void view::importMezzi()
+{
+    QString val;
+    QFile fileRead("C:/Users/Claudio/Documents/GitHub/ProgettoPao/test.json");
+
+    if(!fileRead.open(QIODevice::ReadOnly | QIODevice::Text)){  // apre il file e controlla se è riuscito ad aprirlo correttamente
+        QMessageBox msgBox;
+        msgBox.setText("File non aperto");
+        msgBox.exec();
+        return;
+    }
+
+    val = fileRead.readAll(); // legge il file e lo inserisce dentro la QString "val"
+    fileRead.close();   // chiude il file (importante)
+
+    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8()); // comando che permette di leggere o fole json
+
+    QJsonObject jObject = doc.object(); // comando che ottiene l'oggetto JSON
+
+    QJsonValue value = jObject.value("arrayMezzi");
+    QJsonArray JSONarray = value.toArray();
+
+    for(int i = 0; i < JSONarray.size(); i++){
+       QJsonObject arrayObject = JSONarray[i].toObject();
+
+       if(arrayObject["tipo"] == "mountainbike") // crea oggetto mountainbike
+           qDebug() << arrayObject["tipo"].toString();
+
+       if(arrayObject["tipo"] == "bmx") // crea oggetto bmx
+           qDebug() << arrayObject["tipo"].toString();
+
+       if(arrayObject["tipo"] == "monopattinoElettrico") // crea oggetto monopattinoElettrico
+           qDebug() << arrayObject["tipo"].toString();
+    }
+    QMessageBox msgBox;
+    msgBox.setText("Inserimento completato");
+    msgBox.exec();
+//    in alternativa si può scorrere così
+//    foreach (const QJsonValue & v, JSONarray)
+//        c
+
+    // questo è un pattern su come inserire effettivamente gli oggetti
+//    mountainbike bici(arrayObject["Sella"].toString().toStdString()
+//            , "Corona", arrayObject["dimRuote"].toDouble()
+//            , arrayObject["Marca"].toString().toStdString()
+//            , arrayObject["Modello"].toString().toStdString()
+//            , arrayObject["Telaio"].toString().toStdString()
+//            , arrayObject["Manubrio"].toString().toStdString()
+//            , arrayObject["Price"].toDouble()
+//            , arrayObject["Quantity"].toInt()
+//            , arrayObject["Used"].toBool()
+//            , arrayObject["numMarce"].toInt()
+//            , arrayObject["Ammortizzatori"].toString().toStdString());
+
+
+    mountainbike bici("Sella", "Corona", 12.2, "Marca","Modello", "Telaio", "Manubrio",650.50, 4, 0, 5,"Ammortizzatori");
+
+    deepPtr<veicolo> prova(mountainbike bici);
+
+    QString s = typeid(*prova).name() ;
+}
+
+
