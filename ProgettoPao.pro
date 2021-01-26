@@ -18,7 +18,8 @@ SOURCES += \
     mainwindow.cpp \
     model.cpp \
     mountainbike.cpp \
-    tempoview.cpp \
+    qfinalinsert.cpp \
+    qsecondpage.cpp \
     veicolo.cpp \
     monopattino.cpp \
     monopattinoelettrico.cpp \
@@ -34,7 +35,8 @@ HEADERS += \
     mainwindow.h \
     model.h \
     mountainbike.h \
-    tempoview.h \
+    qfinalinsert.h \
+    qsecondpage.h \
     veicolo.h \
     monopattino.h \
     monopattinoelettrico.h \

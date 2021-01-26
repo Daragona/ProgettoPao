@@ -23,6 +23,7 @@
 #include <QString>
 #include <QFormLayout>
 
+#include <qsecondpage.h>
 #include <deepptr.h>
 class view : public QWidget
 {
@@ -38,7 +39,6 @@ public:
     explicit view(QWidget *parent = nullptr);
 
 public slots:
-    void showFinalInsert(int);
     void showInsertDialog();
 };
 #endif // VIEW_H
