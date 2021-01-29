@@ -13,3 +13,9 @@ double bmx::calcolaTax(){
     return Price*0.90;
 }
 
+void bmx::GetInfo() const{
+
+};
+void bmx::chiediRicambio(){
+
+};

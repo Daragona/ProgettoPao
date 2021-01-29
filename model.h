@@ -7,7 +7,7 @@
 class Model : public QObject{
     Q_OBJECT
 private:
-    Container<deepPtr<veicolo>> *veicoli;
+    Container<int> veicoli;
 
 
 public:
@@ -16,7 +16,7 @@ public:
 signals:
 
 public slots:
-
+    void importMezzi();
 
 };
 

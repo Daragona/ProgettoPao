@@ -25,22 +25,31 @@
 
 #include <qsecondpage.h>
 #include <deepptr.h>
+
+class Controller;       //dichiarazione incompleta per evitare dipendenza
+
 class view : public QWidget
 {
     Q_OBJECT
 private:
+    Controller* controller;
+
+    QPushButton *Usato;
+    QPushButton *Importa;
+    QPushButton *Inserisci;
+
     QWidget InsertPage;
     void itemsList(QGridLayout* screenLayout);
-
     void showMoreInfo();
+    QFrame* veicoloList;
+    QFrame* veicoloElettricoList;
 
-    void createItem(QVBoxLayout* veicoloLayout,QVBoxLayout* veicoloElettricoLayout);
 
 public:
     explicit view(QWidget *parent = nullptr);
-
-public slots:
-    void importMezzi();
+    void setController(Controller* c);
     void showInsertDialog();
+    void showMezzi();
+
 };
 #endif // VIEW_H

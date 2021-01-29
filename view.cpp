@@ -1,5 +1,11 @@
 #include "view.h"
 #include "mountainbike.h"
+#include "container.h"
+#include "controller.h"
+
+#include <iostream>
+
+#include <QLayout>
 #include <QMessageBox>
 #include <QFile>
 #include <QJsonDocument>
@@ -10,7 +16,6 @@
 #include <typeinfo>
 
 //MAIN ---------------
-
 view::view(QWidget *parent): QWidget(parent) {
 
     QGridLayout* screenLayout = new QGridLayout; //Layout centrale del programma
@@ -24,45 +29,13 @@ view::view(QWidget *parent): QWidget(parent) {
     screenLayout->addWidget(titoloInventario,0,0);
 
 
+
+
+
+    //itemsList(screenLayout);
     // metodo per creare i box che contengono i mezzi
-    itemsList(screenLayout);
-
-    //footer dove sono contenuti i pulsanti per l'inserimento e per vedere l'usato
-
-    QPushButton *Usato = new QPushButton("&Usato", this);
-    QPushButton *Inserisci = new QPushButton("&Inserisci", this);
-
-    connect(Inserisci, &QPushButton::released, this, &view::showInsertDialog);
 
 
-    screenLayout->addWidget(Usato,3,0);
-    screenLayout->addWidget(Inserisci,3,1);
-
-
-    QPushButton *Importa = new QPushButton("&Importa", this);
-
-    connect(Importa, &QPushButton::released, this, &view::importMezzi);
-
-    screenLayout->addWidget(Importa,1,3);
-
-
-
-
-
-
-    setLayout(screenLayout);
-    resize(QSize(1024, 720));
-
-    //showInsertDialog();
-
-}
-
-//FUNZIONI ------------------
-
-//Body del programma
-
-void view::itemsList(QGridLayout* screenLayout)
-{
     QLabel* titoloVeicolo = new QLabel;
     QLabel* titoloVeicoloElettrico = new QLabel;
 
@@ -73,8 +46,8 @@ void view::itemsList(QGridLayout* screenLayout)
     QVBoxLayout* veicoloLayout = new QVBoxLayout;
     QVBoxLayout* veicoloElettricoLayout = new QVBoxLayout;
 
-    QFrame* veicoloList = new QFrame;
-    QFrame* veicoloElettricoList = new QFrame;
+    veicoloList = new QFrame;
+    veicoloElettricoList = new QFrame;
 
     veicoloLayout->addWidget(titoloVeicolo);
     veicoloElettricoLayout->addWidget(titoloVeicoloElettrico);
@@ -89,8 +62,16 @@ void view::itemsList(QGridLayout* screenLayout)
     screenLayout->addWidget(titoloVeicolo,1,0);
     screenLayout->addWidget(titoloVeicoloElettrico,1,1);
 
-    for(int i = 0; i < 9; i++)
-        createItem(veicoloLayout, veicoloElettricoLayout); // creazione dell'item
+
+    //showMezzi(5);
+
+
+
+
+
+
+
+    //showMezzi(veicoloLayout, veicoloElettricoLayout); // creazione dell'item
 
     //showMoreInfo();
 
@@ -98,10 +79,40 @@ void view::itemsList(QGridLayout* screenLayout)
     screenLayout->addWidget(veicoloList,2,0);
     screenLayout->addWidget(veicoloElettricoList,2,1);
 
+    //footer dove sono contenuti i pulsanti per l'inserimento e per vedere l'usato
+
+    Usato = new QPushButton("&Usato", this);
+    Inserisci = new QPushButton("&Inserisci", this);
+
+
+    screenLayout->addWidget(Usato,3,0);
+    screenLayout->addWidget(Inserisci,3,1);
+
+
+    Importa = new QPushButton("Importa");
+    screenLayout->addWidget(Importa,1,3);
+
+    setLayout(screenLayout);
+    resize(QSize(1024, 720));
+
+    //showInsertDialog();
+
 }
 
+//FUNZIONI ------------------
+
+// setter per collegare la vista agli eventi
+void view::setController(Controller *c)
+{
+    controller = c;
+    connect(Importa, SIGNAL(clicked()), controller, SLOT(importaMezziController()));
+    connect(Inserisci, &QPushButton::released, this, &view::showInsertDialog);
+
+}
+
+
 // metodo per la creazione dell'oggetto
-void view::createItem(QVBoxLayout* veicoloLayout, QVBoxLayout* veicoloElettricoLayout)
+void view::showMezzi()
 {
 
     QFrame* item = new QFrame;
@@ -109,7 +120,7 @@ void view::createItem(QVBoxLayout* veicoloLayout, QVBoxLayout* veicoloElettricoL
 
     QFrame* image = new QFrame;
     QVBoxLayout* imageItemLayout = new QVBoxLayout;
-    imageItemLayout->addWidget(new QLabel(this));
+    imageItemLayout->addWidget(new QLabel());
     image->setStyleSheet(" border:1px solid black");
 
     QLabel* nomeItem = new QLabel;
@@ -118,8 +129,8 @@ void view::createItem(QVBoxLayout* veicoloLayout, QVBoxLayout* veicoloElettricoL
     QLabel* quantitaItem = new QLabel;
     quantitaItem-> setText("22");
 
-    QPushButton *deleteButton = new QPushButton("&Delete", this);
-    QPushButton *moreInfoButton = new QPushButton("&More info", this);
+    QPushButton *deleteButton = new QPushButton("&Delete");
+    QPushButton *moreInfoButton = new QPushButton("&More info");
 
     itemLayout->addWidget(image,0,1,0,1);
     itemLayout->addWidget(nomeItem,0,2);
@@ -129,7 +140,7 @@ void view::createItem(QVBoxLayout* veicoloLayout, QVBoxLayout* veicoloElettricoL
 
     item->setLayout(itemLayout);
 
-    veicoloLayout->addWidget(item);
+    veicoloList->layout()->addWidget(item);
 }
 
 // finestra che si apre quando clicchi il pulsante more info sul singolo item
@@ -167,66 +178,5 @@ void view::showInsertDialog(){
 
 }
 
-void view::importMezzi()
-{
-    QString val;
-    QFile fileRead("C:/Users/Claudio/Documents/GitHub/ProgettoPao/test.json");
-
-    if(!fileRead.open(QIODevice::ReadOnly | QIODevice::Text)){  // apre il file e controlla se è riuscito ad aprirlo correttamente
-        QMessageBox msgBox;
-        msgBox.setText("File non aperto");
-        msgBox.exec();
-        return;
-    }
-
-    val = fileRead.readAll(); // legge il file e lo inserisce dentro la QString "val"
-    fileRead.close();   // chiude il file (importante)
-
-    QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8()); // comando che permette di leggere o fole json
-
-    QJsonObject jObject = doc.object(); // comando che ottiene l'oggetto JSON
-
-    QJsonValue value = jObject.value("arrayMezzi");
-    QJsonArray JSONarray = value.toArray();
-
-    for(int i = 0; i < JSONarray.size(); i++){
-       QJsonObject arrayObject = JSONarray[i].toObject();
-
-       if(arrayObject["tipo"] == "mountainbike") // crea oggetto mountainbike
-           qDebug() << arrayObject["tipo"].toString();
-
-       if(arrayObject["tipo"] == "bmx") // crea oggetto bmx
-           qDebug() << arrayObject["tipo"].toString();
-
-       if(arrayObject["tipo"] == "monopattinoElettrico") // crea oggetto monopattinoElettrico
-           qDebug() << arrayObject["tipo"].toString();
-    }
-    QMessageBox msgBox;
-    msgBox.setText("Inserimento completato");
-    msgBox.exec();
-//    in alternativa si può scorrere così
-//    foreach (const QJsonValue & v, JSONarray)
-//        c
-
-    // questo è un pattern su come inserire effettivamente gli oggetti
-//    mountainbike bici(arrayObject["Sella"].toString().toStdString()
-//            , "Corona", arrayObject["dimRuote"].toDouble()
-//            , arrayObject["Marca"].toString().toStdString()
-//            , arrayObject["Modello"].toString().toStdString()
-//            , arrayObject["Telaio"].toString().toStdString()
-//            , arrayObject["Manubrio"].toString().toStdString()
-//            , arrayObject["Price"].toDouble()
-//            , arrayObject["Quantity"].toInt()
-//            , arrayObject["Used"].toBool()
-//            , arrayObject["numMarce"].toInt()
-//            , arrayObject["Ammortizzatori"].toString().toStdString());
-
-
-    mountainbike bici("Sella", "Corona", 12.2, "Marca","Modello", "Telaio", "Manubrio",650.50, 4, 0, 5,"Ammortizzatori");
-
-    deepPtr<veicolo> prova(mountainbike bici);
-
-    QString s = typeid(*prova).name() ;
-}
 
 

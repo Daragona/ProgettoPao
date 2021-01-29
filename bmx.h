@@ -9,7 +9,9 @@ public:
     bmx(string, string, double, string,string, string, string,double, int, bool,bool);
     bmx();
     bool hasPad();
-    double calcolaTax() override;
+    void GetInfo() const;
+    void chiediRicambio();
+    double calcolaTax();
 
 };
 

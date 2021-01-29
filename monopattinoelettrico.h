@@ -10,8 +10,10 @@ public:
     string accelleratore;
 public:
     monopattinoElettrico(string a);
-
     string getAccelleratore() const;
+    void GetInfo() const;
+    void chiediRicambio();
+    double calcolaTax();
 };
 
 #endif // MONOPATTINOELETTRICO_H

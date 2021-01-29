@@ -2,10 +2,25 @@
 #define CONTROLLER_H
 
 
-class controller
+#include <QObject>
+#include "view.h"
+#include "model.h"
+
+class Controller : public QObject
 {
+    Q_OBJECT
+private:
+    view* viewMezzi;
+    Model* model;
+    void showMezzi();
+
 public:
-    controller();
+    explicit Controller(QObject *parent = nullptr);
+    void setModel(Model* m);
+    void setView(view* v);
+
+public slots:
+    void importaMezziController();
 };
 
 #endif // CONTROLLER_H

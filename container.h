@@ -13,9 +13,9 @@ private:
     private:
         T info;
         nodo* next;
-        nodo(const T&, nodo* = nullptr);
-        nodo(const nodo&);
-        void distruggi();
+        nodo(const T& t, nodo* p = nullptr) : info(t), next(p){};
+        //nodo(const nodo&);
+        //void distruggi();
     };
     nodo* primo, *ultimo;
     static nodo* clone(nodo*, nodo*&);
@@ -23,11 +23,22 @@ private:
 
 
 public:
-    Container();
-    Container(const T&);
-    Container(const Container&);
-    ~Container();
+//    Container();
+//    Container(const T&);
+//    Container(const Container&);
+//    ~Container();
     Container& operator=(const Container&);
+
+    void push_back(T p)
+    {
+      if(ultimo){
+          ultimo->next = new nodo(p, nullptr);
+          ultimo = ultimo->next;
+      }
+      else{
+          primo=ultimo=new nodo(p);
+      }
+    }
 
     class constIteratore
     {
@@ -53,16 +64,81 @@ public:
     private:
         nodo * puntatore;
         bool past_the_end;
-        Iteratore(nodo*);
+        Iteratore(nodo * p) : puntatore(p) {}
     public:
-        Iteratore();
-        Iteratore& operator=(const Iteratore&);
-        Iteratore &operator++();
-        Iteratore &operator++(int);
-        T &operator*() const;
-        T *operator->() const;
-        bool operator==(const Iteratore &);
-        bool operator!=(const Iteratore &);
+
+        Iteratore() : puntatore(nullptr) {}
+
+//        typename Iteratore inizio()
+//        {
+//            return Iteratore(primo);
+//        }
+
+
+//        typename Container<T>::Iteratore Container<T>::fine()
+//        {
+//            return Iteratore(ultimo);
+//        }
+
+
+//        Container<T>::Iteratore::Iteratore() : puntatore(nullptr) {}
+
+
+//        typename Container<T>::Iteratore & Container<T>::Iteratore::operator=(const Iteratore & it)
+//        {
+//            puntatore=it.puntatore;
+//            return *this;
+//        }
+
+
+//        typename Container<T>::Iteratore& Container<T>::Iteratore::operator++()
+//        {
+//            if(puntatore!= nullptr){
+//                if(!past_the_end){
+//                    if(puntatore->next != nullptr) {puntatore = puntatore->next;}
+//                 else { puntatore = puntatore+1; past_the_end = true; }
+//                 }
+//            }
+//            return *this;
+
+//        }
+
+//        typename Container<T>::Iteratore& Container<T>::Iteratore::operator++(int)
+//        {
+//            constIteratore aux(*this);
+//                if(puntatore!= nullptr) {
+//                    if(!past_the_end) {
+//                        if(puntatore->next != nullptr) puntatore = puntatore->next;
+//                        else {puntatore = puntatore+1; past_the_end = true;}
+//                    }
+//                }
+//                return aux;
+
+//        }
+
+
+//        T & Container<T>::Iteratore::operator*() const
+//        {
+//            return puntatore->info;
+//        }
+
+
+//        T * Container<T>::Iteratore::operator->() const
+//        {
+//            return &(puntatore->info);
+//        }
+
+
+//        bool Container<T>::Iteratore::operator==(const Iteratore& it)
+//        {
+//            return puntatore == it.puntatore;
+//        }
+
+
+//        bool Container<T>::Iteratore::operator!=(const Iteratore& it)
+//        {
+//            return puntatore != it.puntatore;
+//        }
 
     };
     constIteratore inizio() const;
