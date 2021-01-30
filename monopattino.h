@@ -6,13 +6,13 @@
 
 using std::string;
 
-class monopattino : virtual public veicolo {
-public:
+class monopattino : virtual protected veicolo {
+protected:
     string deck;
     string collarinoDiChiusura;
     string gripTape;
 public:
-    monopattino(string d, string c, string g);
+    monopattino(string, string, string, string, double, int, bool, string, string, string);
     monopattino();
 
     // getter

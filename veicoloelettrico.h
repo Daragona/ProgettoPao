@@ -3,18 +3,21 @@
 
 #include "veicolo.h"
 
-class veicoloElettrico : virtual public veicolo{
-private:
+class veicoloElettrico : virtual protected veicolo{
+protected:
     int Watt;
-    double ampere;
+    double Ampere;
     double oreAutonomia;
 
 public:
+    veicoloElettrico(string, string, string, string, double, int, bool,int,double);
+    veicoloElettrico(int, double);
     veicoloElettrico();
 
     int getWatt() const ;
     double getAmpere() const ;
-    virtual unsigned int calcolaVelocitaMax() const = 0;
+    virtual int calcolaVelocitaMax() const =0;
+
 };
 
 #endif // VEICOLOELETTRICO_H

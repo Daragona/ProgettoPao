@@ -3,9 +3,9 @@
 
 
 mountainbike::mountainbike
-(string Sella_, string Corona_, double diamRuote_, string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_, int numMarce_,string Ammortizzatori_):
+(string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_,string Sella_, string Corona_, double diamRuote_, int numMarce_,string Ammortizzatori_):
 
-    bicicletta(Sella_,Corona_,diamRuote_,Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_),
+    bicicletta(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_,Sella_,Corona_,diamRuote_),
     numMarce(numMarce_),Ammortizzatori(Ammortizzatori_){}
 
 int mountainbike::getNumMarce(){
@@ -16,8 +16,6 @@ string mountainbike::getAmmortizzatori(){
     return Ammortizzatori;
 }
 
-
-
 void mountainbike::GetInfo() const{
 
 };
@@ -26,5 +24,5 @@ void mountainbike::chiediRicambio(){
 };
 
 double mountainbike::calcolaTax(){
-    return Price*0.90;
+    return Price*0.10;
 }

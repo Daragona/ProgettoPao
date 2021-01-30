@@ -5,7 +5,7 @@
 using std::string;
 
 class veicolo{
-public:
+protected:
     string Marca;
     string Modello;
     string Telaio;

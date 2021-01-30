@@ -4,16 +4,20 @@
 #include "veicoloelettrico.h"
 #include "monopattino.h"
 
-class monopattinoElettrico: public monopattino, public veicoloElettrico
+class monopattinoElettrico: protected monopattino, protected veicoloElettrico
 {
-public:
+protected:
     string accelleratore;
 public:
-    monopattinoElettrico(string a);
+    monopattinoElettrico(string, string, string, string, double, int, bool, string, string, string, int, double, string);
+    monopattinoElettrico();
+
     string getAccelleratore() const;
-    void GetInfo() const;
-    void chiediRicambio();
-    double calcolaTax();
+    void GetInfo() const override ;
+    void chiediRicambio() override ;
+    double calcolaTax() override ;
+    int calcolaVelocitaMax() const override ;
+
 };
 
 #endif // MONOPATTINOELETTRICO_H
