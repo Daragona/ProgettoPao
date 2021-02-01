@@ -25,6 +25,7 @@
 
 #include <qsecondpage.h>
 #include <deepptr.h>
+#include "mountainbike.h";
 
 class Controller;       //dichiarazione incompleta per evitare dipendenza
 
@@ -49,7 +50,7 @@ public:
     explicit view(QWidget *parent = nullptr);
     void setController(Controller* c);
     void showInsertDialog();
-    void showMezzi();
+    void showMezzi(QString immagine, QString Modello, QString Quantita, QString Prezzo);
 
 };
 #endif // VIEW_H

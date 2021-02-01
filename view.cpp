@@ -62,17 +62,6 @@ view::view(QWidget *parent): QWidget(parent) {
     screenLayout->addWidget(titoloVeicolo,1,0);
     screenLayout->addWidget(titoloVeicoloElettrico,1,1);
 
-
-    //showMezzi(5);
-
-
-
-
-
-
-
-    //showMezzi(veicoloLayout, veicoloElettricoLayout); // creazione dell'item
-
     //showMoreInfo();
 
 
@@ -112,7 +101,7 @@ void view::setController(Controller *c)
 
 
 // metodo per la creazione dell'oggetto
-void view::showMezzi()
+void view::showMezzi(QString immagine, QString Modello, QString Quantita, QString Prezzo)
 {
 
     QFrame* item = new QFrame;
@@ -124,10 +113,10 @@ void view::showMezzi()
     image->setStyleSheet(" border:1px solid black");
 
     QLabel* nomeItem = new QLabel;
-    nomeItem->setText("Grazziella");
+    nomeItem->setText(Modello);
 
     QLabel* quantitaItem = new QLabel;
-    quantitaItem-> setText("22");
+    quantitaItem-> setText(Quantita);
 
     QPushButton *deleteButton = new QPushButton("&Delete");
     QPushButton *moreInfoButton = new QPushButton("&More info");

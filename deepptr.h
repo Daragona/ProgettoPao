@@ -18,10 +18,11 @@ public:
            return pter;
     }
 
-    //    deepPtr(const deepPtr& dptr){
-    //          if(!dptr) pter=nullptr;
-    //          else      pter=dptr.pted->clone();
-    //    }
+        deepPtr(const deepPtr& dptr){
+              if(!dptr) pter=nullptr;
+
+              pter = dptr.pter;
+        }
 
 
     //    ~deepPtr(){
@@ -29,18 +30,18 @@ public:
     //    }
 
 
-    //    deepPtr<T>& operator=(const deepPtr& dptr){
-    //        if(this != &dptr){
-    //            if(pter)    delete pter;
-    //            pter = dptr.pter->clone();
-    //        }
-    //        return *this;
-    //    }
+        deepPtr<T>& operator=(const deepPtr& dptr){
+            if(this != &dptr){
+                if(pter)    delete pter;
+                pter = dptr.pter;
+            }
+            return *this;
+        }
 
 
-    //    bool operator==(const deepPtr& dptr) const{
-    //        return *pter==*(dptr.pted);
-    //    }
+//        bool operator==(const deepPtr& dptr) const{
+//            return *pter==*(dptr.pted);
+//        }
 
 
     //    bool operator!=(const deepPtr& dptr) const{

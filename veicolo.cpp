@@ -5,6 +5,21 @@ veicolo::veicolo(string Marca_,string Modello_, string Telaio_, string Manubrio_
 veicolo::veicolo(){
 
 }
+
+string veicolo::getModello() const{
+    return Modello;
+}
+int veicolo::getQuantita() const{
+    return Quantity;
+}
+double veicolo::getPrezzo() const{
+    return Price;
+}
+
+
+//veicolo::veicolo(){
+
+//}
 void veicolo::changeQuantity(int NewQ){
     if(NewQ>=0){
         Quantity=NewQ;

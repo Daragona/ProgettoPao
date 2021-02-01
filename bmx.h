@@ -2,7 +2,7 @@
 #define BMX_H
 #include "bicicletta.h"
 
-class bmx: protected bicicletta{
+class bmx: public bicicletta{
 protected:
     bool Pad;
 public:

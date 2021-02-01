@@ -1,5 +1,12 @@
+#include <iostream>
 #include "controller.h"
-#include "iostream"
+#include "container.h"
+
+#include "mountainbike.h"
+#include "bmx.h"
+#include "monopattinoelettrico.h"
+
+
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>
@@ -7,8 +14,7 @@
 #include <QJsonArray>
 #include <typeinfo>
 #include <QFile>
-#include <container.h>
-
+#include <QString>
 
 Controller::Controller(QObject *parent) : QObject(parent)
 {
@@ -16,6 +22,7 @@ Controller::Controller(QObject *parent) : QObject(parent)
 //    viewMezzi->showMezzi();
 
 }
+
 void Controller::setModel(Model* m){ model = m;}
 
 void Controller::setView(view* v){viewMezzi = v;}
@@ -24,14 +31,8 @@ void Controller::setView(view* v){viewMezzi = v;}
 
 void Controller::importaMezziController()
 {
-//    int i = 10;
-//    deepPtr<int> p(&i);
 
-//    Container<deepPtr<int>> v;
-//    v.push_back(p);
-
-
-
+    // INSERIMENTO DA FILE (VEDERE SE TENERLO QUA O SE FARE UN METODO NEL MODEL )
     QString val;
     QFile fileRead("C:/Users/Claudio/Documents/GitHub/ProgettoPao/test.json");
 
@@ -49,31 +50,77 @@ void Controller::importaMezziController()
     QJsonValue value = jObject.value("arrayMezzi");
     QJsonArray JSONarray = value.toArray();
 
+
+
     for(int i = 0; i < JSONarray.size(); i++){
        QJsonObject arrayObject = JSONarray[i].toObject();
 
-       if(arrayObject["tipo"] == "mountainbike") // crea oggetto mountainbike
-           qDebug() << arrayObject["tipo"].toString();
 
-       if(arrayObject["tipo"] == "bmx") // crea oggetto bmx
-           qDebug() << arrayObject["tipo"].toString();
+       if(arrayObject["tipo"] == "mountainbike"){ // crea oggetto mountainbike
 
-       if(arrayObject["tipo"] == "monopattinoElettrico") // crea oggetto monopattinoElettrico
-           qDebug() << arrayObject["tipo"].toString();
+           mountainbike* p = new mountainbike(arrayObject["Sella"].toString().toStdString()
+                   , arrayObject["Corona"].toString().toStdString()
+                   , arrayObject["dimRuote"].toDouble()
+                   , arrayObject["Marca"].toString().toStdString()
+                   , arrayObject["Modello"].toString().toStdString()
+                   , arrayObject["Telaio"].toString().toStdString()
+                   , arrayObject["Manubrio"].toString().toStdString()
+                   , arrayObject["Price"].toDouble()
+                   , arrayObject["Quantity"].toInt()
+                   , arrayObject["Used"].toBool()
+                   , arrayObject["numMarce"].toInt()
+                   , arrayObject["Ammortizzatori"].toString().toStdString());
+           model->veicoli.push_back(p);
+       }
+
+      if(arrayObject["tipo"] == "bmx"){ // crea oggetto bmx
+
+          bmx* s = new bmx(arrayObject["Sella"].toString().toStdString()
+                  , arrayObject["Corona"].toString().toStdString()
+                  , arrayObject["dimRuote"].toDouble()
+                  , arrayObject["Marca"].toString().toStdString()
+                  , arrayObject["Modello"].toString().toStdString()
+                  , arrayObject["Telaio"].toString().toStdString()
+                  , arrayObject["Manubrio"].toString().toStdString()
+                  , arrayObject["Price"].toDouble()
+                  , arrayObject["Quantity"].toInt()
+                  , arrayObject["Used"].toBool()
+                  , arrayObject["Pad"].toInt());
+          model->veicoli.push_back(s);
+      }
     }
 
+    // FUNZIONA, BISOGNA TROVARE UN MODO MIGLIORE PER ITERARE PERCHE' ALTRIMENTI L'ULTIMO MEMBRO VA FATTO FUORI DAL CICLO
 
+    Container<deepPtr<veicolo>>::Iteratore j;
+    for(j = model->veicoli.inizio(); j != model->veicoli.fine(); ++j) {
+        deepPtr<veicolo> z(*j);
 
-//    mountainbike bici("Sella", "Corona", 12.2, "Marca","Modello", "Telaio", "Manubrio",650.50, 4, 0, 5,"Ammortizzatori");
+        QString immagine = "";
+        QString Modello = QString::fromStdString(z->getModello());
+        QString Quantita = QString::number(z->getQuantita());
+        QString Prezzo = QString::number(z->getPrezzo());
 
-//    deepPtr<veicolo> prova(mountainbike bici);
+        viewMezzi->showMezzi(immagine, Modello,Quantita,Prezzo);
 
-//    QString s = typeid(*prova).name() ;
+    }
+    j= model->veicoli.fine();
+    deepPtr<veicolo> z(*j);
+
+    QString immagine = "";
+    QString Modello = QString::fromStdString(z->getModello());
+    QString Quantita = QString::number(z->getQuantita());
+    QString Prezzo = QString::number(z->getPrezzo());
+
+    viewMezzi->showMezzi(immagine, Modello,Quantita,Prezzo);
+
 
 }
 
 
 
 void Controller::showMezzi(){
-    viewMezzi->showMezzi();
+
+
+    //viewMezzi->showMezzi();
 };

@@ -2,18 +2,18 @@
 #define MOUNTAINBIKE_H
 #include "bicicletta.h"
 
-class mountainbike: protected bicicletta{
-protected:
+class mountainbike: public bicicletta{
+public:
     int numMarce;
     string Ammortizzatori;
 public:
-    mountainbike(string,string, string, string,double, int, bool,string, string, double, int,string);
+    mountainbike(string, string, double, string,string, string, string,double, int, bool,int,string);
     mountainbike();
     int getNumMarce();
     string getAmmortizzatori();
-    void GetInfo() const override;
-    void chiediRicambio() override;
-    double calcolaTax() override;
+    void GetInfo() const;
+    void chiediRicambio();
+    double calcolaTax();
 
 };
 

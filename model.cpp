@@ -68,16 +68,6 @@ void Model::importMezzi()
 
 //    in alternativa si può scorrere così
 //    foreach (const QJsonValue & v, JSONarray)
-//        c
-
-
-
-    Container<deepPtr<mountainbike>> c;
-
-    mountainbike bici("Sella", "Corona", 12.2, "Marca","Modello", "Telaio", "Manubrio",650.50, 4, 0, 5,"Ammortizzatori");
-    deepPtr<mountainbike> p(&bici);
-
-    c.push_back(p);
 
 
     //deepPtr<veicolo> prova;

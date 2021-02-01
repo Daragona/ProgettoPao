@@ -6,7 +6,7 @@
 
 using std::string;
 
-class monopattino : virtual protected veicolo {
+class monopattino : virtual public veicolo {
 protected:
     string deck;
     string collarinoDiChiusura;

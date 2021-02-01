@@ -2,7 +2,7 @@
 #define BICICLETTA_H
 #include "veicolo.h"
 
-class bicicletta:  virtual protected veicolo{
+class bicicletta:  virtual public veicolo{
 protected:
     string Sella;
     string Corona;

@@ -24,6 +24,12 @@ public:
 
     void changeQuantity(int);
     void changePrice(double);
+
+    string getModello() const;
+    int getQuantita() const;
+    double getPrezzo() const;
+
+
 };
 
 #endif // VEICOLO_H
