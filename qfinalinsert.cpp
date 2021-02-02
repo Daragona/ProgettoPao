@@ -139,7 +139,7 @@ void qfinalinsert::confirm(){
         else if((dynamic_cast<QCheckBox*>(*I)))         StringaLista->append((dynamic_cast<QCheckBox*>(*I))->text());
      }
     ctrl->createVeicolo(StringaLista);
-    //this->close();
+    this->close();
 }
 void qfinalinsert::back(){
     QSecondPage *Choice=new QSecondPage(ctrl);
