@@ -25,7 +25,7 @@
 
 #include <qsecondpage.h>
 #include <deepptr.h>
-#include "mountainbike.h";
+#include "mountainbike.h"
 
 class Controller;       //dichiarazione incompleta per evitare dipendenza
 
