@@ -4,7 +4,7 @@
 #include "veicoloelettrico.h"
 #include "monopattino.h"
 
-class monopattinoElettrico: protected monopattino, protected veicoloElettrico
+class monopattinoElettrico: public monopattino, public veicoloElettrico
 {
 protected:
     string accelleratore;

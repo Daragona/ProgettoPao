@@ -21,15 +21,12 @@ public:
     virtual void chiediRicambio()=0;
     virtual double calcolaTax() =0;
     virtual ~veicolo()=default;
-
-    void changeQuantity(int);
-    void changePrice(double);
-
     string getModello() const;
     int getQuantita() const;
     double getPrezzo() const;
 
-
+    void changeQuantity(int);
+    void changePrice(double);
 };
 
 #endif // VEICOLO_H

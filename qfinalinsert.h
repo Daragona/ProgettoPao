@@ -23,15 +23,29 @@
 #include <QDoubleSpinBox>
 #include <QString>
 #include <QFormLayout>
+#include <QListWidget>
 #include "view.h"
+#include "container.h"
+#include "deepptr.h"
 
+class Controller;
 class qfinalinsert : public QWidget
 {
     Q_OBJECT
 private:
+    QString tipo;
+    //QLineEdit *Marca, *Modello, *Telaio, *Manubrio;
+    //QCheckBox *Used;
+    //QDoubleSpinBox *Prezzo;
+    //QSpinBox *Quantita;
+    QList<QWidget*> *extra;
+    Container<deepPtr<QObject>> *Valori;
+    Controller *ctrl;
 public:
-    explicit qfinalinsert(int=1);
-signals :
+    explicit qfinalinsert(class Controller*,int=1);
+private slots:
+    void confirm();
+    void back();
 };
 
 #endif // QFINALINSERT_H

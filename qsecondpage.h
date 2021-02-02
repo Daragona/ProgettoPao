@@ -25,12 +25,18 @@
 #include "view.h"
 #include "qfinalinsert.h"
 
+class Controller;
+
 class QSecondPage: public QWidget
 {
     Q_OBJECT
-
+private:
+    Controller *ctrl;
 public:
-    QSecondPage();
+    QSecondPage(class Controller*);
+
+
+
 private slots:
     void createFinalInsert(int);
 };

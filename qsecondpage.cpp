@@ -1,8 +1,8 @@
 #include "qsecondpage.h"
 
-QSecondPage::QSecondPage()
+QSecondPage::QSecondPage(Controller *c)
 {
-
+    ctrl=c;
     //this->setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint); //
     QVBoxLayout *insertDialogLayout = new QVBoxLayout;
     insertDialogLayout->setSizeConstraint(QVBoxLayout::SetFixedSize);
@@ -48,7 +48,8 @@ QSecondPage::QSecondPage()
 };
 
 void QSecondPage::createFinalInsert(int x){
-    qfinalinsert *wdg=new qfinalinsert(x);
+    qfinalinsert *wdg=new qfinalinsert(ctrl,x);
 
     wdg->show();
+    this->close();
 }

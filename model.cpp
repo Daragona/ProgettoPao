@@ -68,7 +68,7 @@ void Model::importMezzi()
 
 //    in alternativa si può scorrere così
 //    foreach (const QJsonValue & v, JSONarray)
-
+//        c
 
     //deepPtr<veicolo> prova;
 
@@ -77,3 +77,80 @@ void Model::importMezzi()
 //    //veicoli.push_back(prova);
 
 }
+
+void Model::addVeicolo(QStringList *Lista){
+    //string Sella_, string Corona_, double diamRuote_, string Marca_,string Modello_, string Telaio_, string Manubrio_,
+    //double Price_, int Quantity_, bool Used_,int Watt_, double Ampere_, string Pedalata_, string Sforzo_):
+    QStringList::iterator i;
+
+    i=Lista->begin();
+    veicolo *Nuova;
+    QString Tipo=*i++;
+
+    if(Tipo=="E-Bike"){
+        Nuova=new ebike(
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toDouble(),
+                    (*i++).toInt(),
+                    (*i++).toInt(),
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toInt(),
+                    (*i++).toInt(),
+                    (*i++).toDouble(),
+                    (*i++).toStdString(),
+                    (*i++).toStdString()
+                    );
+    }else if(Tipo=="BMX"){
+        Nuova=new bmx((*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt(),
+                           (*i++).toInt(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toInt(),
+                           (*i++).toInt()
+                           );
+
+    }else if(Tipo=="Mountain-Bike"){
+        Nuova=new mountainbike((*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt(),
+                           (*i++).toInt(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toInt(),
+                           (*i++).toInt(),
+                           (*i++).toStdString()
+                           );
+
+    }else /*if(Tipo=="Monopattino Elettrico")*/{
+        Nuova=new monopattinoElettrico(
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt(),
+                           (*i++).toInt(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toInt(),
+                           (*i++).toDouble(),
+                           (*i++).toStdString());
+    }
+
+    veicoli.push_back(Nuova);
+
+    }
+

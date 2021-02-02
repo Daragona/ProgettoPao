@@ -6,7 +6,7 @@ class bmx: public bicicletta{
 protected:
     bool Pad;
 public:
-    bmx(string, string, double, string,string, string, string,double, int, bool,bool);
+    bmx(string,string, string, string,double, int, bool, string , string , double ,bool);
     bmx();
     bool hasPad();
     double calcolaTax() override;

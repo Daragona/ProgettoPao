@@ -21,6 +21,7 @@ public:
 
 public slots:
     void importaMezziController();
+    void createVeicolo(QStringList*);
 };
 
 #endif // CONTROLLER_H

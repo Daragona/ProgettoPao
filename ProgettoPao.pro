@@ -24,7 +24,8 @@ SOURCES += \
     monopattino.cpp \
     monopattinoelettrico.cpp \
     veicoloelettrico.cpp \
-    view.cpp
+    view.cpp \
+    ebike.cpp
 
 HEADERS += \
     bicicletta.h \
@@ -41,7 +42,8 @@ HEADERS += \
     monopattino.h \
     monopattinoelettrico.h \
     veicoloelettrico.h \
-    view.h
+    view.h \
+    ebike.h
 
 FORMS += \
     mainwindow.ui

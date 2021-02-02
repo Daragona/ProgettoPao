@@ -17,7 +17,7 @@
 
 //MAIN ---------------
 view::view(QWidget *parent): QWidget(parent) {
-
+    this->setFixedHeight(650);
     QGridLayout* screenLayout = new QGridLayout; //Layout centrale del programma
 
     QMenuBar* menuBar = new QMenuBar(this);
@@ -28,13 +28,8 @@ view::view(QWidget *parent): QWidget(parent) {
     titoloInventario->setText("INVENTARIO");
     screenLayout->addWidget(titoloInventario,0,0);
 
-
-
-
-
     //itemsList(screenLayout);
     // metodo per creare i box che contengono i mezzi
-
 
     QLabel* titoloVeicolo = new QLabel;
     QLabel* titoloVeicoloElettrico = new QLabel;
@@ -62,6 +57,12 @@ view::view(QWidget *parent): QWidget(parent) {
     screenLayout->addWidget(titoloVeicolo,1,0);
     screenLayout->addWidget(titoloVeicoloElettrico,1,1);
 
+
+    //showMezzi(5);
+
+
+    //showMezzi(veicoloLayout, veicoloElettricoLayout); // creazione dell'item
+
     //showMoreInfo();
 
 
@@ -79,6 +80,7 @@ view::view(QWidget *parent): QWidget(parent) {
 
 
     Importa = new QPushButton("Importa");
+    Importa->setFixedSize(80,60);
     screenLayout->addWidget(Importa,1,3);
 
     setLayout(screenLayout);
@@ -93,8 +95,8 @@ view::view(QWidget *parent): QWidget(parent) {
 // setter per collegare la vista agli eventi
 void view::setController(Controller *c)
 {
-    controller = c;
-    connect(Importa, SIGNAL(clicked()), controller, SLOT(importaMezziController()));
+    ctrl = c;
+    connect(Importa, SIGNAL(clicked()), ctrl, SLOT(importaMezziController()));
     connect(Inserisci, &QPushButton::released, this, &view::showInsertDialog);
 
 }
@@ -162,7 +164,7 @@ void view::showMoreInfo()
 
 // quando clicchi sul bottone inserisci
 void view::showInsertDialog(){
-    QSecondPage *wdg=new QSecondPage();
+    QSecondPage *wdg=new QSecondPage(ctrl);
     wdg->show();
 
 }

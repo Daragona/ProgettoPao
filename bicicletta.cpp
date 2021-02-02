@@ -2,7 +2,7 @@
 
 bicicletta::bicicletta(string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_,string Sella_, string Corona_, double diamRuote_):
     veicolo(Marca_,Modello_, Telaio_, Manubrio_,Price_, Quantity_, Used_),
-    Sella(Sella_),Corona(Corona_),diamRuote(diamRuote_>0? diamRuote_ : 0)
+    Sella(Sella_),Corona(Corona_),diamRuote(diamRuote_)
     {}
 
 bicicletta::bicicletta(string Sella_, string Corona_, double diamRuote_):

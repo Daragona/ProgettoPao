@@ -21,5 +21,6 @@ double monopattinoElettrico::calcolaTax() {
 
 }
 int monopattinoElettrico::calcolaVelocitaMax() const{
+
 }
 

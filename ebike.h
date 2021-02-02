@@ -4,11 +4,11 @@
 #include "veicoloelettrico.h"
 
 
-class ebike: protected veicoloElettrico, protected bicicletta{
+class ebike: public veicoloElettrico, public bicicletta{
 protected:
     string SensorePedalata, SensoreSforzo;
 public:
-    ebike(string, string, double, string,string, string, string,double, int, bool, int, double, string, string);
+    ebike(string,string, string, string,double, int, bool, string, string, double, int, double, string, string);
     ebike();
     string getPedalata() const;
     string getSforzo() const;

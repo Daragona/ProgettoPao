@@ -25,15 +25,15 @@
 
 #include <qsecondpage.h>
 #include <deepptr.h>
-#include "mountainbike.h"
 
 class Controller;       //dichiarazione incompleta per evitare dipendenza
+
 
 class view : public QWidget
 {
     Q_OBJECT
 private:
-    Controller* controller;
+    Controller *ctrl;
 
     QPushButton *Usato;
     QPushButton *Importa;

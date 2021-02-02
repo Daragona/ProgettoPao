@@ -162,4 +162,3 @@
 //      primo=ultimo=new nodo(p);
 //  }
 //}
-
