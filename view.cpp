@@ -2,6 +2,7 @@
 #include "mountainbike.h"
 #include "container.h"
 #include "controller.h"
+#include "qsecondpage.h"
 
 #include <iostream>
 
@@ -14,6 +15,8 @@
 #include <QTextStream>
 #include <QJsonArray>
 #include <typeinfo>
+#include <QScrollArea>
+#include <QScrollBar>
 
 //MAIN ---------------
 view::view(QWidget *parent): QWidget(parent) {
@@ -38,10 +41,10 @@ view::view(QWidget *parent): QWidget(parent) {
     titoloVeicoloElettrico->setText("VEICOLO ELETTRICO");
 
     // i due box che contengono uno le bici e uno i monopattini
-    QVBoxLayout* veicoloLayout = new QVBoxLayout;
-    QVBoxLayout* veicoloElettricoLayout = new QVBoxLayout;
+    QVBoxLayout* veicoloLayout = new QVBoxLayout();
+    QVBoxLayout* veicoloElettricoLayout = new QVBoxLayout();
 
-    veicoloList = new QFrame;
+    veicoloList = new QFrame();
     veicoloElettricoList = new QFrame;
 
     veicoloLayout->addWidget(titoloVeicolo);
@@ -50,20 +53,11 @@ view::view(QWidget *parent): QWidget(parent) {
     veicoloList->setLayout(veicoloLayout);
     veicoloElettricoList->setLayout(veicoloElettricoLayout);
 
-
     veicoloList->setStyleSheet("background-color:white; border:1px solid black");
     veicoloElettricoList->setStyleSheet("background-color:white;border:1px solid black");
 
     screenLayout->addWidget(titoloVeicolo,1,0);
     screenLayout->addWidget(titoloVeicoloElettrico,1,1);
-
-
-    //showMezzi(5);
-
-
-    //showMezzi(veicoloLayout, veicoloElettricoLayout); // creazione dell'item
-
-    //showMoreInfo();
 
 
     screenLayout->addWidget(veicoloList,2,0);
@@ -164,9 +158,10 @@ void view::showMoreInfo()
 
 // quando clicchi sul bottone inserisci
 void view::showInsertDialog(){
-    QSecondPage *wdg=new QSecondPage(ctrl);
-    wdg->show();
-
+    if(!wdg || !wdg->isOpen()){
+        wdg=new QSecondPage(ctrl);
+        wdg->show();
+    }
 }
 
 

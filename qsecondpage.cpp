@@ -2,6 +2,7 @@
 
 QSecondPage::QSecondPage(Controller *c)
 {
+    Open=true;
     ctrl=c;
     //this->setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint); //
     QVBoxLayout *insertDialogLayout = new QVBoxLayout;
@@ -41,15 +42,24 @@ QSecondPage::QSecondPage(Controller *c)
     insertDialogLayout->addWidget(groupBox);
 
     QPushButton *abort = new QPushButton("Annulla", this);
+    abort->setFixedWidth(80);
     insertDialogLayout->addWidget(abort);
     connect(abort, &QPushButton::clicked, [this]{
-        close();
+        this->close();
+        Open=false;
     });
 };
 
 void QSecondPage::createFinalInsert(int x){
+
     qfinalinsert *wdg=new qfinalinsert(ctrl,x);
 
     wdg->show();
+    Open=false;
     this->close();
 }
+QSecondPage::~QSecondPage(){
+    ctrl=nullptr;
+}
+
+

@@ -1,6 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 #include <QObject>
+#include <QMap>
 
 #include "mountainbike.h"
 #include "container.h"
@@ -16,6 +17,7 @@ private:
 
 public:
     Container<deepPtr<veicolo>> veicoli;
+    QMap<deepPtr<veicolo>, QString> MapPath;
 
     Model();
     void addVeicolo(QStringList*);

@@ -4,15 +4,17 @@
 qfinalinsert::qfinalinsert(Controller *c, int x){
     ctrl=c;
     //this->setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint); //
+    this->setWindowTitle(tipo);
 
     if(x==0)            tipo="E-Bike";
     else if (x==1)      tipo="BMX";
     else if(x==2)       tipo="Mountain-Bike";
     else if(x==3)       tipo="Monopattino Elettrico";
 
-    this->setWindowTitle(tipo);
     QVBoxLayout *mainVertical= new QVBoxLayout ();
     this->setLayout(mainVertical);
+    mainVertical->setSizeConstraint(QVBoxLayout::SetFixedSize);
+
 
     QString titleString="<h4>"+tipo+"</h4>";
     QLabel *Title= new QLabel(titleString);
@@ -39,14 +41,14 @@ qfinalinsert::qfinalinsert(Controller *c, int x){
     generalLayout->addRow(tr("&Modello:"), (*I++));
     generalLayout->addRow(tr("&Telaio:"), (*I++));
     generalLayout->addRow(tr("&Manubrio:"), (*I++));
+
+    (dynamic_cast<QDoubleSpinBox*>(*I))->setSingleStep(10);
+    (dynamic_cast<QDoubleSpinBox*>(*I))->setMaximum(100000);
     generalLayout->addRow(tr("&Prezzo:"), (*I++));
-//    (*I)->setSingleStep(10);
-  //  (*I)->setValue(0);
-    //(*I)->setMaximum(1000000);
+    (dynamic_cast<QSpinBox*>(*I))->setSingleStep(5);
+    (dynamic_cast<QSpinBox*>(*I))->setMinimum(1);
+    (dynamic_cast<QSpinBox*>(*I))->setMaximum(100000);
     generalLayout->addRow(tr("&Quantità:"), (*I++));
-    //(*I)->setSingleStep(5);
-    //(*I)->setValue(1);
-    //(*I)->setMaximum(1000000);
     generalLayout->addRow(tr("&Usato:"), (*I++));
 
     //Informazioni specifiche
@@ -104,9 +106,13 @@ qfinalinsert::qfinalinsert(Controller *c, int x){
         specificLayout->addRow(tr("&Accelleratore:"), (*I++));
 
     }
+    QPushButton *fileB=new QPushButton("Select Image");
+    connect(fileB, &QPushButton::clicked, [this]{
+        Path=this->pickfile();
+    });
 
     //Bottono finali
-
+    specificLayout->addRow("Immagine:", fileB);
     QPushButton *back=new QPushButton("Indietro");
     QPushButton *abort=new QPushButton("Annulla");
     QPushButton *confirm=new QPushButton("Conferma");
@@ -134,10 +140,12 @@ void qfinalinsert::confirm(){
     QStringList *StringaLista=new QStringList;
     StringaLista->append(tipo);
     for(I=extra->begin();I!=extra->end();I++){
-        if((dynamic_cast<QLineEdit*>(*I)))              StringaLista->append((dynamic_cast<QLineEdit*>(*I))->text());
-        else if((dynamic_cast<QAbstractSpinBox*>(*I)))  StringaLista->append((dynamic_cast<QAbstractSpinBox*>(*I))->text());
-        else if((dynamic_cast<QCheckBox*>(*I)))         StringaLista->append((dynamic_cast<QCheckBox*>(*I))->text());
+        if(dynamic_cast<QLineEdit*>(*I))            StringaLista->append((dynamic_cast<QLineEdit*>(*I))->text());
+        else if(dynamic_cast<QDoubleSpinBox*>(*I))  StringaLista->append(QString::number((dynamic_cast<QDoubleSpinBox*>(*I))->value()));
+        else if(dynamic_cast<QSpinBox*>(*I))        StringaLista->append((dynamic_cast<QSpinBox*>(*I))->text());
+        else if(dynamic_cast<QCheckBox*>(*I))       StringaLista->append(QString::number((dynamic_cast<QCheckBox*>(*I))->isChecked()));
      }
+    StringaLista->append(Path);
     ctrl->createVeicolo(StringaLista);
     this->close();
 }
@@ -145,4 +153,11 @@ void qfinalinsert::back(){
     QSecondPage *Choice=new QSecondPage(ctrl);
     Choice->show();
     this->close();
+}
+
+QString qfinalinsert::pickfile(){
+    QString fileName = QFileDialog::getOpenFileName(this,
+           tr("Seleziona foto"), "",
+           tr("*.png;*.jpeg;*.gif ;;All Files (*)"));
+    return fileName;
 }

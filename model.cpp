@@ -79,8 +79,6 @@ void Model::importMezzi()
 }
 
 void Model::addVeicolo(QStringList *Lista){
-    //string Sella_, string Corona_, double diamRuote_, string Marca_,string Modello_, string Telaio_, string Manubrio_,
-    //double Price_, int Quantity_, bool Used_,int Watt_, double Ampere_, string Pedalata_, string Sforzo_):
     QStringList::iterator i;
 
     i=Lista->begin();
@@ -96,9 +94,10 @@ void Model::addVeicolo(QStringList *Lista){
                     (*i++).toDouble(),
                     (*i++).toInt(),
                     (*i++).toInt(),
+
                     (*i++).toStdString(),
                     (*i++).toStdString(),
-                    (*i++).toInt(),
+                    (*i++).toDouble(),
                     (*i++).toInt(),
                     (*i++).toDouble(),
                     (*i++).toStdString(),
@@ -112,9 +111,10 @@ void Model::addVeicolo(QStringList *Lista){
                            (*i++).toDouble(),
                            (*i++).toInt(),
                            (*i++).toInt(),
+
                            (*i++).toStdString(),
                            (*i++).toStdString(),
-                           (*i++).toInt(),
+                           (*i++).toDouble(),
                            (*i++).toInt()
                            );
 
@@ -126,9 +126,10 @@ void Model::addVeicolo(QStringList *Lista){
                            (*i++).toDouble(),
                            (*i++).toInt(),
                            (*i++).toInt(),
+
                            (*i++).toStdString(),
                            (*i++).toStdString(),
-                           (*i++).toInt(),
+                           (*i++).toDouble(),
                            (*i++).toInt(),
                            (*i++).toStdString()
                            );
@@ -142,6 +143,7 @@ void Model::addVeicolo(QStringList *Lista){
                            (*i++).toDouble(),
                            (*i++).toInt(),
                            (*i++).toInt(),
+
                            (*i++).toStdString(),
                            (*i++).toStdString(),
                            (*i++).toStdString(),

@@ -126,6 +126,17 @@ void Controller::createVeicolo(QStringList *Lista){
 
 
     model->addVeicolo(Lista);
+    QStringList::iterator i;
+
+    i=Lista->begin();
+    *i++; *i++;
+    QString immagine = "";
+    QString Modello  =(*i++);
+    *i++; *i++;
+    QString Prezzo = (*i++);
+    QString Quantita = (*i++);
+
+    viewMezzi->showMezzi(immagine, Modello,Quantita,Prezzo);
 
 
 }

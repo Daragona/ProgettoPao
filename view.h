@@ -23,16 +23,20 @@
 #include <QString>
 #include <QFormLayout>
 
-#include <qsecondpage.h>
 #include <deepptr.h>
 
 class Controller;       //dichiarazione incompleta per evitare dipendenza
-
+class QSecondPage;
 
 class view : public QWidget
 {
     Q_OBJECT
 private:
+
+    QSecondPage *wdg=nullptr;
+
+
+
     Controller *ctrl;
 
     QPushButton *Usato;

@@ -32,10 +32,12 @@ class QSecondPage: public QWidget
     Q_OBJECT
 private:
     Controller *ctrl;
+    bool Open;
+
 public:
     QSecondPage(class Controller*);
-
-
+    ~QSecondPage();
+    bool isOpen(){return Open;}
 
 private slots:
     void createFinalInsert(int);
