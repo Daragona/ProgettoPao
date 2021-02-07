@@ -20,7 +20,7 @@ public:
     QMap<deepPtr<veicolo>, QString> MapPath;
 
     Model();
-    void addVeicolo(QStringList*);
+    void addVeicolo(deepPtr<veicolo>);
     //Bisogna passare Tipo veicolo e tutti gli attributi. Magari in un Container<deepPtr<QObject>>??
 
     void rimuoviVeicolo();

@@ -4,7 +4,7 @@ QSecondPage::QSecondPage(Controller *c)
 {
     Open=true;
     ctrl=c;
-    //this->setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint); //
+    this->setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint); //
     QVBoxLayout *insertDialogLayout = new QVBoxLayout;
     insertDialogLayout->setSizeConstraint(QVBoxLayout::SetFixedSize);
     this->setLayout(insertDialogLayout);

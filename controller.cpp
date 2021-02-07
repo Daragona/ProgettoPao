@@ -53,7 +53,6 @@ void Controller::importaMezziController()
     for(int i = 0; i < JSONarray.size(); i++){
        QJsonObject arrayObject = JSONarray[i].toObject();
 
-
        if(arrayObject["tipo"] == "mountainbike"){ // crea oggetto mountainbike
 
            mountainbike* p = new mountainbike(
@@ -69,11 +68,11 @@ void Controller::importaMezziController()
                      , arrayObject["dimRuote"].toDouble()
                      , arrayObject["numMarce"].toInt()
                      , arrayObject["Ammortizzatori"].toString().toStdString());
-           model->veicoli.push_back(p);
+           model->addVeicolo(p);
+           viewMezzi->showMezzi(p,arrayObject["tipo"].toString());
        }
 
       if(arrayObject["tipo"] == "bmx"){ // crea oggetto bmx
-
           bmx* s = new bmx(
                       arrayObject["Marca"].toString().toStdString()
                     , arrayObject["Modello"].toString().toStdString()
@@ -86,35 +85,10 @@ void Controller::importaMezziController()
                     , arrayObject["Corona"].toString().toStdString()
                     , arrayObject["dimRuote"].toDouble()
                     , arrayObject["Pad"].toInt());
-          model->veicoli.push_back(s);
+          model->addVeicolo(s);
+          viewMezzi->showMezzi(s,arrayObject["tipo"].toString());
       }
     }
-
-    // FUNZIONA, BISOGNA TROVARE UN MODO MIGLIORE PER ITERARE PERCHE' ALTRIMENTI L'ULTIMO MEMBRO VA FATTO FUORI DAL CICLO
-    // la prima volta che importi ne aggiunge 2, la seconda volta ripete quei 2 e ne inserisce altri 2, la terza volta ripete gli ultimi 4 e ne inserisce altri 2
-    // O almeno mi sembra così.
-    Container<deepPtr<veicolo>>::Iteratore j;
-    for(j = model->veicoli.inizio(); j != model->veicoli.fine(); ++j) {
-        deepPtr<veicolo> z(*j);
-
-        QString immagine = "";
-        QString Modello = QString::fromStdString(z->getModello());
-        QString Quantita = QString::number(z->getQuantita());
-        QString Prezzo = QString::number(z->getPrezzo());
-
-        viewMezzi->showMezzi(immagine, Modello,Quantita,Prezzo);
-
-    }
-    j= model->veicoli.fine();
-    deepPtr<veicolo> z(*j);
-
-    QString immagine = "";
-    QString Modello = QString::fromStdString(z->getModello());
-    QString Quantita = QString::number(z->getQuantita());
-    QString Prezzo = QString::number(z->getPrezzo());
-
-    viewMezzi->showMezzi(immagine, Modello,Quantita,Prezzo);
-
 }
 
 
@@ -123,20 +97,81 @@ void Controller::showMezzi(){
 };
 
 void Controller::createVeicolo(QStringList *Lista){
-
-
-    model->addVeicolo(Lista);
     QStringList::iterator i;
 
     i=Lista->begin();
-    *i++; *i++;
-    QString immagine = "";
-    QString Modello  =(*i++);
-    *i++; *i++;
-    QString Prezzo = (*i++);
-    QString Quantita = (*i++);
+    veicolo *Nuova;
+    QString Tipo=*i++;
 
-    viewMezzi->showMezzi(immagine, Modello,Quantita,Prezzo);
+    if(Tipo=="E-Bike"){
+        Nuova=new ebike(
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toDouble(),
+                    (*i++).toInt(),
+                    (*i++).toInt(),
+
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
+                    (*i++).toDouble(),
+                    (*i++).toInt(),
+                    (*i++).toDouble(),
+                    (*i++).toStdString(),
+                    (*i++).toStdString()
+                    );
+    }else if(Tipo=="BMX"){
+        Nuova=new bmx((*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt(),
+                           (*i++).toInt(),
+
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt()
+                           );
+
+    }else if(Tipo=="Mountain-Bike"){
+        Nuova=new mountainbike((*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt(),
+                           (*i++).toInt(),
+
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt(),
+                           (*i++).toStdString()
+                           );
+
+    }else /*if(Tipo=="Monopattino Elettrico")*/{
+        Nuova=new monopattinoElettrico(
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toDouble(),
+                           (*i++).toInt(),
+                           (*i++).toInt(),
+
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
+                           (*i++).toInt(),
+                           (*i++).toDouble(),
+                           (*i++).toStdString());
+    }
+    deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
+    model->addVeicolo(*ptr);
+    viewMezzi->showMezzi(*ptr,Tipo,*i++);
 
 
 }

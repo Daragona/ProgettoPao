@@ -20,6 +20,7 @@ SOURCES += \
     mountainbike.cpp \
     qfinalinsert.cpp \
     qsecondpage.cpp \
+    qwidgetveicolo.cpp \
     veicolo.cpp \
     monopattino.cpp \
     monopattinoelettrico.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     mountainbike.h \
     qfinalinsert.h \
     qsecondpage.h \
+    qwidgetveicolo.h \
     veicolo.h \
     monopattino.h \
     monopattinoelettrico.h \

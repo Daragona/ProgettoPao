@@ -15,7 +15,6 @@
 #include <QTextStream>
 #include <QJsonArray>
 #include <typeinfo>
-#include <QScrollArea>
 #include <QScrollBar>
 
 //MAIN ---------------
@@ -28,7 +27,8 @@ view::view(QWidget *parent): QWidget(parent) {
     menuBar->addMenu(file);
 
     QLabel* titoloInventario = new QLabel; // Titolo
-    titoloInventario->setText("INVENTARIO");
+    titoloInventario->setFixedHeight(30);
+    titoloInventario->setText("<center><h1>INVENTARIO</h1></center>");
     screenLayout->addWidget(titoloInventario,0,0);
 
     //itemsList(screenLayout);
@@ -36,52 +36,55 @@ view::view(QWidget *parent): QWidget(parent) {
 
     QLabel* titoloVeicolo = new QLabel;
     QLabel* titoloVeicoloElettrico = new QLabel;
+    titoloVeicolo->setFixedHeight(25);
+    titoloVeicoloElettrico->setFixedHeight(25);
 
-    titoloVeicolo->setText("VEICOLO");
-    titoloVeicoloElettrico->setText("VEICOLO ELETTRICO");
+    titoloVeicolo->setText("<center><h2>VEICOLO</h2></center>");
+    titoloVeicoloElettrico->setText("<center><h2>VEICOLO ELETTRICO</h2></center>");
 
     // i due box che contengono uno le bici e uno i monopattini
-    QVBoxLayout* veicoloLayout = new QVBoxLayout();
-    QVBoxLayout* veicoloElettricoLayout = new QVBoxLayout();
+    QVBoxLayout *veicoloLayout=new QVBoxLayout;
+    QVBoxLayout* veicoloElettricoLayout = new QVBoxLayout;
 
-    veicoloList = new QFrame();
-    veicoloElettricoList = new QFrame;
-
-    veicoloLayout->addWidget(titoloVeicolo);
-    veicoloElettricoLayout->addWidget(titoloVeicoloElettrico);
-
-    veicoloList->setLayout(veicoloLayout);
-    veicoloElettricoList->setLayout(veicoloElettricoLayout);
-
+    veicoloList = new QScrollArea();
+    veicoloList->setFixedSize(400,450);
+    veicoloList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    veicoloList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    veicoloList->setWidgetResizable(0);
     veicoloList->setStyleSheet("background-color:white; border:1px solid black");
+    veicoloElettricoList = new QScrollArea();
+    veicoloElettricoList->setFixedSize(400,450);
+    veicoloElettricoList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    veicoloElettricoList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    veicoloElettricoList->setWidgetResizable(0);
     veicoloElettricoList->setStyleSheet("background-color:white;border:1px solid black");
+
+    QWidget *widgetLista=new QWidget;
+    QWidget *widgetListaElettrico=new QWidget;
+    widgetLista->setFixedSize(veicoloList->width()-20,0);
+    widgetLista->setStyleSheet("background-color:grey");
+    widgetListaElettrico->setFixedSize(veicoloElettricoList->width()-20, 0);
+    widgetListaElettrico->setStyleSheet("background-color:grey");
+
+    widgetLista->setLayout(veicoloLayout);
+    veicoloList->setWidget(widgetLista);
+    widgetListaElettrico->setLayout(veicoloElettricoLayout);
+    veicoloElettricoList->setWidget(widgetListaElettrico);
 
     screenLayout->addWidget(titoloVeicolo,1,0);
     screenLayout->addWidget(titoloVeicoloElettrico,1,1);
-
-
     screenLayout->addWidget(veicoloList,2,0);
     screenLayout->addWidget(veicoloElettricoList,2,1);
 
-    //footer dove sono contenuti i pulsanti per l'inserimento e per vedere l'usato
-
     Usato = new QPushButton("&Usato", this);
     Inserisci = new QPushButton("&Inserisci", this);
-
-
+    Importa = new QPushButton("Importa");
+    Importa->setFixedSize(60,40);
     screenLayout->addWidget(Usato,3,0);
     screenLayout->addWidget(Inserisci,3,1);
-
-
-    Importa = new QPushButton("Importa");
-    Importa->setFixedSize(80,60);
     screenLayout->addWidget(Importa,1,3);
 
     setLayout(screenLayout);
-    resize(QSize(1024, 720));
-
-    //showInsertDialog();
-
 }
 
 //FUNZIONI ------------------
@@ -95,37 +98,20 @@ void view::setController(Controller *c)
 
 }
 
-
 // metodo per la creazione dell'oggetto
-void view::showMezzi(QString immagine, QString Modello, QString Quantita, QString Prezzo)
-{
+void view::showMezzi(deepPtr<veicolo> toInsert, QString Tipo, QString path){
 
-    QFrame* item = new QFrame;
-    QGridLayout* itemLayout = new QGridLayout; //Layout centrale del programma
+    qwidgetveicolo *item=new qwidgetveicolo(toInsert,path);
+    item->setMaximumHeight(100);
+    item->setStyleSheet("background-color:white; border:1px solid black");
+    if(Tipo=="E-Bike" || Tipo =="Monopattino Elettrico"){
+        veicoloElettricoList->widget()->layout()->addWidget(item);
+        veicoloElettricoList->widget()->setFixedHeight(veicoloElettricoList->widget()->height()+item->height()+5);
+    }else{
+        veicoloList->widget()->layout()->addWidget(item);
+        veicoloList->widget()->setFixedHeight(veicoloList->widget()->height()+item->height()+5);
+    }
 
-    QFrame* image = new QFrame;
-    QVBoxLayout* imageItemLayout = new QVBoxLayout;
-    imageItemLayout->addWidget(new QLabel());
-    image->setStyleSheet(" border:1px solid black");
-
-    QLabel* nomeItem = new QLabel;
-    nomeItem->setText(Modello);
-
-    QLabel* quantitaItem = new QLabel;
-    quantitaItem-> setText(Quantita);
-
-    QPushButton *deleteButton = new QPushButton("&Delete");
-    QPushButton *moreInfoButton = new QPushButton("&More info");
-
-    itemLayout->addWidget(image,0,1,0,1);
-    itemLayout->addWidget(nomeItem,0,2);
-    itemLayout->addWidget(quantitaItem,0,3);
-    itemLayout->addWidget(deleteButton,0,4);
-    itemLayout->addWidget(moreInfoButton,1,4);
-
-    item->setLayout(itemLayout);
-
-    veicoloList->layout()->addWidget(item);
 }
 
 // finestra che si apre quando clicchi il pulsante more info sul singolo item
