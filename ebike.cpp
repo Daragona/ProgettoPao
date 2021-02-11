@@ -1,9 +1,9 @@
 #include "ebike.h"
 
-ebike::ebike(string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_,string Sella_, string Corona_, double diamRuote_,int Watt_, double Ampere_, string Pedalata_, string Sforzo_):
-    veicolo(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_),
-    veicoloElettrico(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_,Watt_,Ampere_),
-    bicicletta(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_,Sella_, Corona_,diamRuote_),
+ebike::ebike(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string Telaio_, string Manubrio_,string Sella_, string Corona_, double diamRuote_,int Watt_, double Ampere_, string Pedalata_, string Sforzo_):
+    veicolo(Marca_,Modello_,Price_,Quantity_,Used_),
+    veicoloElettrico(Marca_,Modello_,Price_,Quantity_,Used_,Watt_,Ampere_),
+    bicicletta(Marca_,Modello_,Price_,Quantity_,Used_,Telaio_,Manubrio_,Sella_, Corona_,diamRuote_),
     SensorePedalata(Pedalata_), SensoreSforzo(Sforzo_)
 
 {}

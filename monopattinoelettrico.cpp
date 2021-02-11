@@ -1,10 +1,10 @@
 #include "monopattinoelettrico.h"
 
-monopattinoElettrico::monopattinoElettrico(string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_, string deck_, string collarino_, string grip_, int Watt_, double Ampere_, string accelleratore_):
+monopattinoElettrico::monopattinoElettrico(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string deck_, string collarino_, string grip_, int Watt_, double Ampere_, string accelleratore_):
 
-    veicolo(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_),
-    monopattino(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_,deck_, collarino_,grip_),
-    veicoloElettrico(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_,Watt_,Ampere_),
+    veicolo(Marca_,Modello_,Price_,Quantity_,Used_),
+    monopattino(Marca_,Modello_,Price_,Quantity_,Used_,deck_, collarino_,grip_),
+    veicoloElettrico(Marca_,Modello_,Price_,Quantity_,Used_,Watt_,Ampere_),
     accelleratore(accelleratore_)
     {}
 

@@ -58,11 +58,11 @@ void Controller::importaMezziController()
            mountainbike* p = new mountainbike(
                        arrayObject["Marca"].toString().toStdString()
                      , arrayObject["Modello"].toString().toStdString()
-                     , arrayObject["Telaio"].toString().toStdString()
-                     , arrayObject["Manubrio"].toString().toStdString()
                      , arrayObject["Price"].toDouble()
                      , arrayObject["Quantity"].toInt()
                      , arrayObject["Used"].toBool()
+                     , arrayObject["Telaio"].toString().toStdString()
+                     , arrayObject["Manubrio"].toString().toStdString()
                      , arrayObject["Sella"].toString().toStdString()
                      , arrayObject["Corona"].toString().toStdString()
                      , arrayObject["dimRuote"].toDouble()
@@ -76,11 +76,11 @@ void Controller::importaMezziController()
           bmx* s = new bmx(
                       arrayObject["Marca"].toString().toStdString()
                     , arrayObject["Modello"].toString().toStdString()
-                    , arrayObject["Telaio"].toString().toStdString()
-                    , arrayObject["Manubrio"].toString().toStdString()
                     , arrayObject["Price"].toDouble()
                     , arrayObject["Quantity"].toInt()
                     , arrayObject["Used"].toBool()
+                    , arrayObject["Telaio"].toString().toStdString()
+                    , arrayObject["Manubrio"].toString().toStdString()
                     , arrayObject["Sella"].toString().toStdString()
                     , arrayObject["Corona"].toString().toStdString()
                     , arrayObject["dimRuote"].toDouble()
@@ -107,12 +107,12 @@ void Controller::createVeicolo(QStringList *Lista){
         Nuova=new ebike(
                     (*i++).toStdString(),
                     (*i++).toStdString(),
-                    (*i++).toStdString(),
-                    (*i++).toStdString(),
                     (*i++).toDouble(),
                     (*i++).toInt(),
                     (*i++).toInt(),
 
+                    (*i++).toStdString(),
+                    (*i++).toStdString(),
                     (*i++).toStdString(),
                     (*i++).toStdString(),
                     (*i++).toDouble(),
@@ -124,12 +124,12 @@ void Controller::createVeicolo(QStringList *Lista){
     }else if(Tipo=="BMX"){
         Nuova=new bmx((*i++).toStdString(),
                            (*i++).toStdString(),
-                           (*i++).toStdString(),
-                           (*i++).toStdString(),
                            (*i++).toDouble(),
                            (*i++).toInt(),
                            (*i++).toInt(),
 
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
                            (*i++).toStdString(),
                            (*i++).toStdString(),
                            (*i++).toDouble(),
@@ -139,12 +139,12 @@ void Controller::createVeicolo(QStringList *Lista){
     }else if(Tipo=="Mountain-Bike"){
         Nuova=new mountainbike((*i++).toStdString(),
                            (*i++).toStdString(),
-                           (*i++).toStdString(),
-                           (*i++).toStdString(),
                            (*i++).toDouble(),
                            (*i++).toInt(),
                            (*i++).toInt(),
 
+                           (*i++).toStdString(),
+                           (*i++).toStdString(),
                            (*i++).toStdString(),
                            (*i++).toStdString(),
                            (*i++).toDouble(),
@@ -154,8 +154,6 @@ void Controller::createVeicolo(QStringList *Lista){
 
     }else /*if(Tipo=="Monopattino Elettrico")*/{
         Nuova=new monopattinoElettrico(
-                           (*i++).toStdString(),
-                           (*i++).toStdString(),
                            (*i++).toStdString(),
                            (*i++).toStdString(),
                            (*i++).toDouble(),
@@ -170,8 +168,13 @@ void Controller::createVeicolo(QStringList *Lista){
                            (*i++).toStdString());
     }
     deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
-    model->addVeicolo(*ptr);
+    model->addVeicolo(Nuova);
+
     viewMezzi->showMezzi(*ptr,Tipo,*i++);
 
 
+}
+
+void Controller::deleteVeicolo(deepPtr<veicolo> toRemove){
+    //model->removeVeicolo(toRemove);
 }

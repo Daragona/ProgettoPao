@@ -8,7 +8,7 @@ class ebike: public veicoloElettrico, public bicicletta{
 protected:
     string SensorePedalata, SensoreSforzo;
 public:
-    ebike(string,string, string, string,double, int, bool, string, string, double, int, double, string, string);
+    ebike(string,string,double, int, bool, string, string, string, string, double, int, double, string, string);
     ebike();
     string getPedalata() const;
     string getSforzo() const;

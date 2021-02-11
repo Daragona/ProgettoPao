@@ -25,28 +25,25 @@ public:
         }
 
 
-    //    ~deepPtr(){
-    //        if(pter)    delete pter;
-    //    }
 
 
-        deepPtr<T>& operator=(const deepPtr& dptr){
-            if(this != &dptr){
-                if(pter)    delete pter;
-                pter = dptr.pter;
-            }
-            return *this;
+    deepPtr<T>& operator=(const deepPtr& dptr){
+        if(this != &dptr){
+            if(pter)    delete pter;
+            pter = dptr.pter;
         }
+            return *this;
+    }
 
 
-//        bool operator==(const deepPtr& dptr) const{
-//            return *pter==*(dptr.pted);
-//        }
+    bool operator==(const deepPtr& dptr) const{
+        return *pter==*(dptr.pter);
+    }
 
 
-    //    bool operator!=(const deepPtr& dptr) const{
-    //        return *pter!=*(dptr.pter);
-    //    }
+    bool operator!=(const deepPtr& dptr) const{
+        return *pter!=*(dptr.pter);
+    }
 };
 
 

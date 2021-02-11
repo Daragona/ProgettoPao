@@ -26,7 +26,6 @@
 
 #include <deepptr.h>
 #include <veicolo.h>
-#include "qwidgetveicolo.h"
 
 class Controller;       //dichiarazione incompleta per evitare dipendenza
 class QSecondPage;
@@ -44,12 +43,12 @@ private:
 
     QWidget InsertPage;
     void itemsList(QGridLayout* screenLayout);
-    void showMoreInfo();
     QScrollArea* veicoloList;
     QScrollArea* veicoloElettricoList;
 
 
 public:
+    Controller* getCtrl();
     explicit view(QWidget *parent = nullptr);
     void setController(Controller* c);
     void showInsertDialog();

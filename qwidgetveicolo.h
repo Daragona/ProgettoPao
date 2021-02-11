@@ -5,13 +5,21 @@
 
 #include "deepptr.h"
 #include "veicolo.h"
+#include "view.h"
+#include "controller.h"
 class qwidgetveicolo : public QWidget
 {
     Q_OBJECT
+private:
+    deepPtr<veicolo> ptrVeicolo;
 public:
-    explicit qwidgetveicolo(deepPtr<veicolo>, QString=nullptr,QWidget *parent = nullptr);
+    view vista;
+    qwidgetveicolo(deepPtr<veicolo>, QString=nullptr,view *parent=nullptr);
 
 signals:
+
+public slots:
+    void deleteSlot();
 
 };
 

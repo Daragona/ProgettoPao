@@ -2,8 +2,8 @@
 #include "veicoloelettrico.h"
 #include <iostream>
 
-veicoloElettrico::veicoloElettrico(string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_,int Watt_, double Ampere_):
-    veicolo(Marca_,Modello_, Telaio_, Manubrio_,Price_, Quantity_, Used_),
+veicoloElettrico::veicoloElettrico(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_,int Watt_, double Ampere_):
+    veicolo(Marca_,Modello_,Price_, Quantity_, Used_),
     Watt(Watt_), Ampere(Ampere_)
     {}
 veicoloElettrico::veicoloElettrico(int Watt_, double Ampere_):

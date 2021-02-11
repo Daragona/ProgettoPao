@@ -4,11 +4,13 @@
 
 class bicicletta:  virtual public veicolo{
 protected:
+    string Telaio;
+    string Manubrio;
     string Sella;
     string Corona;
     double diamRuote;
 public:
-    bicicletta(string, string, string, string, double, int, bool,string, string, double);
+    bicicletta(string, string, double, int, bool, string, string,string, string, double);
     bicicletta(string, string, double);
     bicicletta();
     string getSella() const;

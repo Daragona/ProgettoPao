@@ -17,15 +17,12 @@ private:
 
 public:
     Container<deepPtr<veicolo>> veicoli;
-    QMap<deepPtr<veicolo>, QString> MapPath;
 
     Model();
     void addVeicolo(deepPtr<veicolo>);
-    //Bisogna passare Tipo veicolo e tutti gli attributi. Magari in un Container<deepPtr<QObject>>??
-
-    void rimuoviVeicolo();
-    void filtraVeicoloMarca(QString);
-    void filtraVeicoloTipo(QString);
+    void removeVeicolo(deepPtr<veicolo>);
+    //void filtraVeicoloMarca(QString);
+    //void filtraVeicoloTipo(QString);
     Container<deepPtr<veicolo>> visualizzaVeicoli();
 
 signals:

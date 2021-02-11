@@ -30,18 +30,14 @@ qfinalinsert::qfinalinsert(Controller *c, int x){
 
     extra->push_back(new QLineEdit("Marca"));
     extra->push_back(new QLineEdit("Modello"));
-    extra->push_back(new QLineEdit("Telaio"));
-    extra->push_back(new QLineEdit("Manubrio"));
     extra->push_back(new QDoubleSpinBox());
     extra->push_back(new QSpinBox());
     extra->push_back(new QCheckBox());
-    I=(extra->begin());
+
+    I=extra->begin();
 
     generalLayout->addRow(tr("&Marca:"), (*I++));
     generalLayout->addRow(tr("&Modello:"), (*I++));
-    generalLayout->addRow(tr("&Telaio:"), (*I++));
-    generalLayout->addRow(tr("&Manubrio:"), (*I++));
-
     (dynamic_cast<QDoubleSpinBox*>(*I))->setSingleStep(10);
     (dynamic_cast<QDoubleSpinBox*>(*I))->setMaximum(100000);
     generalLayout->addRow(tr("&Prezzo:"), (*I++));
@@ -56,12 +52,17 @@ qfinalinsert::qfinalinsert(Controller *c, int x){
     mainVertical->addWidget(specificInfo);
     QFormLayout  *specificLayout=new QFormLayout (specificInfo);
 
-    //QWidget *Primo,*Secondo,*Terzo,*Quarto,*Quinto;
     if(x==0 || x==1 || x==2){
-        // sella , diametro, corona
+
+        extra->push_back(new QLineEdit("Telaio"));
+        extra->push_back(new QLineEdit("Manubrio"));
         extra->push_back(new QLineEdit("Sella"));
         extra->push_back(new QLineEdit("Corona"));
         extra->push_back(new QDoubleSpinBox());
+        I=extra->begin();*I++;*I++;*I++;*I++;*I++;
+
+        specificLayout->addRow(tr("&Telaio:"), (*I++));
+        specificLayout->addRow(tr("&Manubrio:"), (*I++));
         specificLayout->addRow(tr("&Sella:"), (*I++));
         specificLayout->addRow(tr("&Corona:"), (*I++));
         specificLayout->addRow(tr("&Diametro:"), (*I++));
@@ -97,6 +98,7 @@ qfinalinsert::qfinalinsert(Controller *c, int x){
         extra->push_back(new QSpinBox());
         extra->push_back(new QDoubleSpinBox());
         extra->push_back(new QLineEdit("Accelleratore"));
+        I=extra->begin();*I++;*I++;*I++;*I++;*I++;
 
         specificLayout->addRow(tr("&Deck:"), (*I++));
         specificLayout->addRow(tr("&Collarino:"), (*I++));
@@ -106,6 +108,7 @@ qfinalinsert::qfinalinsert(Controller *c, int x){
         specificLayout->addRow(tr("&Accelleratore:"), (*I++));
 
     }
+
     QPushButton *fileB=new QPushButton("Select Image");
     connect(fileB, &QPushButton::clicked, [this]{
         Path=this->pickfile();

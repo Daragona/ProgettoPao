@@ -7,7 +7,7 @@ protected:
     int numMarce;
     string Ammortizzatori;
 public:
-    mountainbike(string,string, string, string,double, int, bool,string, string, double, int,string);
+    mountainbike(string,string,double, int, bool, string, string,string, string, double, int,string);
     mountainbike();
     int getNumMarce();
     string getAmmortizzatori();

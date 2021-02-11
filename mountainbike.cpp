@@ -2,9 +2,9 @@
 
 
 
-mountainbike::mountainbike(string Marca_,string Modello_, string Telaio_, string Manubrio_,double Price_, int Quantity_, bool Used_,string Sella_, string Corona_, double diamRuote_, int numMarce_,string Ammortizzatori_):
-
-    bicicletta(Marca_,Modello_,Telaio_,Manubrio_,Price_,Quantity_,Used_,Sella_,Corona_,diamRuote_),
+mountainbike::mountainbike(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string Telaio_, string Manubrio_,string Sella_, string Corona_, double diamRuote_, int numMarce_,string Ammortizzatori_):
+    veicolo(Marca_,Modello_,Price_,Quantity_,Used_),
+    bicicletta(Marca_,Modello_,Price_,Quantity_,Used_,Telaio_,Manubrio_,Sella_,Corona_,diamRuote_),
     numMarce(numMarce_),Ammortizzatori(Ammortizzatori_){}
 
 int mountainbike::getNumMarce(){

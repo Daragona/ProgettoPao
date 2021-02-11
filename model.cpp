@@ -21,5 +21,15 @@ void Model::importMezzi(){
 
 void Model::addVeicolo(deepPtr<veicolo> toInsert){
     veicoli.push_back(toInsert);
+    auto I=veicoli.inizio();
+}
+void Model::removeVeicolo(deepPtr<veicolo> toRemove){
+    /*auto I=veicoli.inizio();
+    while(I!=veicoli.fine() && (*I==toRemove)){
+        if(*I==toRemove){
+            I->~deepPtr<veicolo>();
+        }
+    }
+*/
 }
 

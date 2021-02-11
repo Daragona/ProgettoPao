@@ -12,7 +12,7 @@ protected:
     string collarinoDiChiusura;
     string gripTape;
 public:
-    monopattino(string, string, string, string, double, int, bool, string, string, string);
+    monopattino(string, string, double, int, bool, string, string, string);
     monopattino();
 
     // getter

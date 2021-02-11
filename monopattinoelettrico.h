@@ -9,7 +9,7 @@ class monopattinoElettrico: public monopattino, public veicoloElettrico
 protected:
     string accelleratore;
 public:
-    monopattinoElettrico(string, string, string, string, double, int, bool, string, string, string, int, double, string);
+    monopattinoElettrico(string, string, double, int, bool, string, string, string, int, double, string);
     monopattinoElettrico();
 
     string getAccelleratore() const;

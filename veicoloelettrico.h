@@ -10,7 +10,7 @@ protected:
     double oreAutonomia;
 
 public:
-    veicoloElettrico(string, string, string, string, double, int, bool,int,double);
+    veicoloElettrico(string, string, double, int, bool,int,double);
     veicoloElettrico(int, double);
     veicoloElettrico();
 
