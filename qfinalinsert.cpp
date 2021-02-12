@@ -113,9 +113,8 @@ qfinalinsert::qfinalinsert(Controller *c, int x){
     connect(fileB, &QPushButton::clicked, [this]{
         Path=this->pickfile();
     });
-
-    //Bottono finali
     specificLayout->addRow("Immagine:", fileB);
+
     QPushButton *back=new QPushButton("Indietro");
     QPushButton *abort=new QPushButton("Annulla");
     QPushButton *confirm=new QPushButton("Conferma");

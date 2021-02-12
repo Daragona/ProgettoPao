@@ -1,5 +1,6 @@
 #include "qwidgetveicolo.h"
 #include <QFrame>
+#include <QFormLayout>
 #include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
@@ -28,7 +29,7 @@ qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *pa
     QPushButton *deleteButton = new QPushButton("&Delete");
     QPushButton *moreInfoButton = new QPushButton("&More info");
     connect(deleteButton, &QPushButton::released, this, &qwidgetveicolo::deleteSlot);
-    //connect(deleteButton, &QPushButton::released, this, &parent::);
+    connect(moreInfoButton, &QPushButton::released, this, &qwidgetveicolo::moreInfoSlot);
 
 
     itemLayout->addWidget(imageLabel,0,0,0,0);
@@ -54,5 +55,37 @@ qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *pa
 void qwidgetveicolo::deleteSlot(){
     vista.getCtrl()->deleteVeicolo(ptrVeicolo);
     this->~qwidgetveicolo();
-
 }
+void qwidgetveicolo::moreInfoSlot(){
+    if(moreInfo) return;
+    moreInfo=true;
+    moreInfoPage=new QWidget();
+    moreInfoPage->setWindowFlags ( Qt::CustomizeWindowHint | Qt::WindowTitleHint);
+
+    QVBoxLayout *mainLayout=new QVBoxLayout(moreInfoPage);
+
+    QGroupBox *groupBox= new QGroupBox ("Informazioni: ");
+    QGridLayout *boxLayout=new QGridLayout(groupBox);
+    mainLayout->addWidget(groupBox);
+
+    Container<string> values=ptrVeicolo->GetInfo();
+    Container<string>::Iteratore I;
+    for(I=values.inizio();I!=values.fine();I++){
+        QLabel *label=new QLabel(QString::fromStdString(*I));
+        boxLayout->addWidget(label);
+    }
+    QLabel *label=new QLabel(QString::fromStdString(*I));
+    boxLayout->addWidget(label);
+
+
+    QPushButton *chiudi=new QPushButton("Chiudi");
+    mainLayout->addWidget(chiudi);
+    connect(chiudi, &QPushButton::clicked, [this]{moreInfo=0; moreInfoPage->close();});
+    chiudi->setFixedWidth(100);
+
+    mainLayout->setSizeConstraint(QVBoxLayout::SetFixedSize);
+    moreInfoPage->setStyleSheet("QLabel{ font-size: 10pt;}");
+    moreInfoPage->show();
+}
+
+

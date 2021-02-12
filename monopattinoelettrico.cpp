@@ -11,8 +11,21 @@ monopattinoElettrico::monopattinoElettrico(string Marca_,string Modello_,double 
 string monopattinoElettrico::getAccelleratore() const { return accelleratore; }
 
 
-void monopattinoElettrico::GetInfo() const{
-
+Container<string> monopattinoElettrico::GetInfo() const{
+    Container<string> strVec;
+    strVec.push_back("Marca: "+Marca);
+    strVec.push_back("Modello: "+Modello);
+    strVec.push_back("Prezzo: "+std::to_string(Price)+" €");
+    strVec.push_back("Quantità: "+std::to_string(Quantity)+" pz");
+    if(Used)    strVec.push_back("Usata: Si");
+    else        strVec.push_back("Usata: No");
+    strVec.push_back("Deck: "+deck);
+    strVec.push_back("Collarino: "+collarinoDiChiusura);
+    strVec.push_back("Grip: "+gripTape);
+    strVec.push_back("Watt: "+std::to_string(Watt));
+    strVec.push_back("Ampere: "+std::to_string(Ampere));
+    strVec.push_back("Accelleratore: "+accelleratore);
+    return strVec;
 }
 void monopattinoElettrico::chiediRicambio(){ }
 

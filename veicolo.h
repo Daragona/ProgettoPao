@@ -2,6 +2,7 @@
 #define VEICOLO_H
 
 #include <string>
+#include <container.h>
 using std::string;
 
 class veicolo{
@@ -15,7 +16,7 @@ protected:
 public:
     veicolo(string,string,double,int,bool);
     veicolo();
-    virtual void GetInfo() const =0;
+    virtual Container<string> GetInfo() const =0;
     virtual void chiediRicambio()=0;
     virtual double calcolaTax() =0;
     virtual ~veicolo()=default;

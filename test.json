@@ -9,10 +9,11 @@
       "Telaio": "Telaio",
       "Manubrio": "Manubrio",
       "Price": 299.99,
-      "Quantity": 1, 
+      "Quantity": 1,
       "Used": 0,
       "numMarce": 5,
-      "Ammortizzatori": "Ammortizzatori"
+      "Ammortizzatori": "Ammortizzatori",
+      "Path": "images/mountain-bike1.jpg"
    },
    {
       "tipo" : "bmx",
@@ -26,7 +27,8 @@
       "Price": 650.50,
       "Quantity": 4,
       "Used": 0,
-      "pad": "PAD bmx"
+      "pad": "PAD bmx",
+      "Path" :"images/bmx1.jpg"
    }]
 
 }

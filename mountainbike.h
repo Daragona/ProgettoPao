@@ -11,7 +11,7 @@ public:
     mountainbike();
     int getNumMarce();
     string getAmmortizzatori();
-    void GetInfo() const override;
+    Container<string> GetInfo() const override;
     void chiediRicambio() override;
     double calcolaTax() override;
 

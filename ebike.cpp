@@ -20,9 +20,26 @@ int ebike::calcolaVelocitaMax() const{
     return 1;
 }
 
-void ebike::GetInfo() const{
-
+Container<string> ebike::GetInfo() const{
+    Container<string> strVec;
+    strVec.push_back("Marca: "+Marca);
+    strVec.push_back("Modello: "+Modello);
+    strVec.push_back("Prezzo: "+std::to_string(Price)+" €");
+    strVec.push_back("Quantità: "+std::to_string(Quantity)+" pz");
+    if(Used)    strVec.push_back("Usata: Si");
+    else        strVec.push_back("Usata: No");
+    strVec.push_back("Telaio: "+Telaio);
+    strVec.push_back("Manubrio: "+Manubrio);
+    strVec.push_back("Sella: "+Sella);
+    strVec.push_back("Corona: "+Corona);
+    strVec.push_back("Diametro: "+std::to_string(diamRuote)+" cm");
+    strVec.push_back("Watt: "+std::to_string(Watt));
+    strVec.push_back("Ampere: "+std::to_string(Ampere));
+    strVec.push_back("Sens. Pedalata: "+SensorePedalata);
+    strVec.push_back("Sens. Sforzo: "+SensoreSforzo);
+    return strVec;
 }
+
 void ebike::chiediRicambio(){
 
 }

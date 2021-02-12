@@ -12,6 +12,8 @@ class qwidgetveicolo : public QWidget
     Q_OBJECT
 private:
     deepPtr<veicolo> ptrVeicolo;
+    bool moreInfo=false;
+    QWidget *moreInfoPage;
 public:
     view vista;
     qwidgetveicolo(deepPtr<veicolo>, QString=nullptr,view *parent=nullptr);
@@ -20,6 +22,7 @@ signals:
 
 public slots:
     void deleteSlot();
+    void moreInfoSlot();
 
 };
 

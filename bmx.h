@@ -1,7 +1,7 @@
 #ifndef BMX_H
 #define BMX_H
 #include "bicicletta.h"
-
+#include <container.h>
 class bmx: public bicicletta{
 protected:
     bool Pad;
@@ -10,7 +10,7 @@ public:
     bmx();
     bool hasPad();
     double calcolaTax() override;
-    void GetInfo() const override;
+    Container<string> GetInfo() const override;
     void chiediRicambio() override;
 };
 

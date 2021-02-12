@@ -13,7 +13,7 @@ public:
     monopattinoElettrico();
 
     string getAccelleratore() const;
-    void GetInfo() const override ;
+    Container<string> GetInfo() const override ;
     void chiediRicambio() override ;
     double calcolaTax() override ;
     int calcolaVelocitaMax() const override ;

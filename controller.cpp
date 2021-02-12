@@ -32,9 +32,7 @@ void Controller::importaMezziController()
 
     // INSERIMENTO DA FILE (VEDERE SE TENERLO QUA O SE FARE UN METODO NEL MODEL )
     QString val;
-    QString path = QDir::currentPath();
-    //Prende però il path della build, non del progetto. Quindi su qt creator bisogna andare su Projects > run > e in working directory mettere la directory del progetto
-    path.append("/test.json");
+    QString path ="test.json"; //Risolto così
     QFile fileRead(path);
 
     if(!fileRead.open(QIODevice::ReadOnly | QIODevice::Text)){  // apre il file e controlla se è riuscito ad aprirlo correttamente
@@ -52,10 +50,9 @@ void Controller::importaMezziController()
 
     for(int i = 0; i < JSONarray.size(); i++){
        QJsonObject arrayObject = JSONarray[i].toObject();
-
+        veicolo *p;
        if(arrayObject["tipo"] == "mountainbike"){ // crea oggetto mountainbike
-
-           mountainbike* p = new mountainbike(
+           p = new mountainbike(
                        arrayObject["Marca"].toString().toStdString()
                      , arrayObject["Modello"].toString().toStdString()
                      , arrayObject["Price"].toDouble()
@@ -68,12 +65,8 @@ void Controller::importaMezziController()
                      , arrayObject["dimRuote"].toDouble()
                      , arrayObject["numMarce"].toInt()
                      , arrayObject["Ammortizzatori"].toString().toStdString());
-           model->addVeicolo(p);
-           viewMezzi->showMezzi(p,arrayObject["tipo"].toString());
-       }
-
-      if(arrayObject["tipo"] == "bmx"){ // crea oggetto bmx
-          bmx* s = new bmx(
+       }else    if(arrayObject["tipo"] == "bmx"){ // crea oggetto bmx
+          p= new bmx(
                       arrayObject["Marca"].toString().toStdString()
                     , arrayObject["Modello"].toString().toStdString()
                     , arrayObject["Price"].toDouble()
@@ -85,9 +78,14 @@ void Controller::importaMezziController()
                     , arrayObject["Corona"].toString().toStdString()
                     , arrayObject["dimRuote"].toDouble()
                     , arrayObject["Pad"].toInt());
-          model->addVeicolo(s);
-          viewMezzi->showMezzi(s,arrayObject["tipo"].toString());
-      }
+      }else if(arrayObject["tipo"] == "e-bike"){
+           p=nullptr;
+       }else{
+           p=nullptr;
+       }
+      model->addVeicolo(p);
+      viewMezzi->showMezzi(p,arrayObject["tipo"].toString(),arrayObject["Path"].toString());
+
     }
 }
 
@@ -171,8 +169,6 @@ void Controller::createVeicolo(QStringList *Lista){
     model->addVeicolo(Nuova);
 
     viewMezzi->showMezzi(*ptr,Tipo,*i++);
-
-
 }
 
 void Controller::deleteVeicolo(deepPtr<veicolo> toRemove){

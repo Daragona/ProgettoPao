@@ -13,7 +13,7 @@ public:
     string getPedalata() const;
     string getSforzo() const;
     double calcolaTax() override;
-    void GetInfo() const override;
+    Container<string> GetInfo() const override;
     void chiediRicambio() override;
     int calcolaVelocitaMax() const override;
 
