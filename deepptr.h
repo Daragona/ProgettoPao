@@ -40,6 +40,11 @@ public:
         return *pter==*(dptr.pter);
     }
 
+    //    bool operator==(bool a)
+    //    {
+    //       bool d = this == nullptr;
+    //       return d == a;
+    //    }
 
     bool operator!=(const deepPtr& dptr) const{
         return *pter!=*(dptr.pter);

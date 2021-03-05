@@ -14,9 +14,11 @@ private:
     deepPtr<veicolo> ptrVeicolo;
     bool moreInfo=false;
     QWidget *moreInfoPage;
+    Controller *ctrl;
+
 public:
     view vista;
-    qwidgetveicolo(deepPtr<veicolo>, QString=nullptr,view *parent=nullptr);
+    qwidgetveicolo(deepPtr<veicolo>, QString=nullptr,view *parent=nullptr, Controller *c= nullptr);
 
 signals:
 

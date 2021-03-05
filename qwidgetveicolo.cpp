@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 
-qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *parent) : QWidget(dynamic_cast<QWidget*>(parent)), ptrVeicolo(toInsert), vista(parent){
+qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *parent, Controller *c) : QWidget(dynamic_cast<QWidget*>(parent)), ptrVeicolo(toInsert), vista(parent), ctrl(c){
     QGridLayout* itemLayout = new QGridLayout; //Layout centrale del programma
     QFrame *item=new QFrame;
     QLabel *imageLabel = new QLabel;
@@ -53,9 +53,11 @@ qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *pa
 }
 
 void qwidgetveicolo::deleteSlot(){
-    vista.getCtrl()->deleteVeicolo(ptrVeicolo);
+    //vista.getCtrl()->deleteVeicolo(ptrVeicolo);
+    ctrl->deleteVeicolo(ptrVeicolo);
     this->~qwidgetveicolo();
 }
+
 void qwidgetveicolo::moreInfoSlot(){
     if(moreInfo) return;
     moreInfo=true;

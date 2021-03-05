@@ -165,12 +165,41 @@ void Controller::createVeicolo(QStringList *Lista){
                            (*i++).toDouble(),
                            (*i++).toStdString());
     }
-    deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
-    model->addVeicolo(Nuova);
 
-    viewMezzi->showMezzi(*ptr,Tipo,*i++);
+
+    deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
+
+    //---
+    bool presente = false;
+    Container<deepPtr<veicolo>>::Iteratore j;
+
+    for(unsigned int i = 0; i < model->veicoli.size(); i++){
+        j = model->veicoli.inizio();
+        deepPtr<veicolo> z(*j);
+
+        if(*j == *ptr){
+            z->setQuantita(Nuova->getQuantita());
+            presente = true;
+        }
+        ++j;
+
+    }
+
+    if(presente != true){
+        model->addVeicolo(Nuova);
+        viewMezzi->showMezzi(*ptr,Tipo,*i++);
+    }else{
+        // non ancora implementato perchè non so come fare, serve quando viene inserito un modello già presente, dovrebbe aggiornare la quantità senza inserire un nuovo campo
+        // attualmente non fa nulla, infatti c'è un warning che lo segnala, ma il programma funziona lo stesso
+
+        QString modello = QString::fromStdString(Nuova->getModello());
+        viewMezzi->updateMezzi(modello,Nuova->getQuantita());
+    }
+
 }
 
 void Controller::deleteVeicolo(deepPtr<veicolo> toRemove){
-    //model->removeVeicolo(toRemove);
+    model->removeVeicolo(toRemove);
+
 }
+

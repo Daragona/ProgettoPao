@@ -15,8 +15,10 @@ private:
         //nodo(const nodo&);
         //void distruggi();
     };
+
     nodo* primo, *ultimo;
     static nodo* clone(nodo*, nodo*&);
+    unsigned int length;
 
 
 
@@ -25,9 +27,12 @@ public:
 //    Container(const T&);
 //    Container(const Container&);
 //    ~Container();
+
     Container& operator=(const Container&);
 
-    Container() : primo(nullptr), ultimo(nullptr){};
+    unsigned int size(){ return length; } ;
+
+    Container() : primo(nullptr), ultimo(nullptr), length(0){};
 
     void push_back(T p)
     {
@@ -38,11 +43,30 @@ public:
       else{
           primo=ultimo=new nodo(p);
       }
+      length += 1;
     }
 
 
 
 
+    void deleteNodo(T toRemove){
+
+        nodo *temp = primo;
+        nodo *prev = nullptr;
+
+        while(temp && temp->info != toRemove){
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if(temp == nullptr){
+            return;
+        }
+
+        prev->next = temp->next;
+        delete temp;
+        length -= 1;
+    }
 
 
     class Iteratore{
@@ -72,26 +96,22 @@ public:
             else{
                 return *this;
             }
-
-
         }
 
 
-        Iteratore& operator++(int)
+        Iteratore& operator++(int n)
         {
-            Iteratore aux(*this);
                 if(puntatore!= nullptr) {
                     if(!past_the_end) {
                         if(puntatore->next != nullptr) puntatore = puntatore->next;
-                        else {puntatore = puntatore+1; past_the_end = true;}
+                        else {puntatore = puntatore+n; past_the_end = true;}
                     }
                 }
-                return aux;
+                return *this;
         }
 
         const T & operator*() const
         {
-            if(this == nullptr) return nullptr;
             return puntatore->info;
         }
 
@@ -116,7 +136,7 @@ public:
 
     Iteratore inizio()
     {
-        return Iteratore(Container::primo);
+            return Iteratore(Container::primo);
     }
 
 

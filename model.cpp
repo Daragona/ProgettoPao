@@ -23,13 +23,23 @@ void Model::addVeicolo(deepPtr<veicolo> toInsert){
     veicoli.push_back(toInsert);
     auto I=veicoli.inizio();
 }
+
 void Model::removeVeicolo(deepPtr<veicolo> toRemove){
-    /*auto I=veicoli.inizio();
-    while(I!=veicoli.fine() && (*I==toRemove)){
-        if(*I==toRemove){
-            I->~deepPtr<veicolo>();
-        }
+    bool presente = false;
+    Container<deepPtr<veicolo>>::Iteratore j;
+
+    veicoli.deleteNodo(toRemove);
+
+    j = veicoli.inizio();
+    for(unsigned int i = 0; i < veicoli.size() && presente != true; i++){
+
+        deepPtr<veicolo> z(*j);
+
+        std::cout << z->getModello();
+        ++j;
+
     }
-*/
+
+
 }
 

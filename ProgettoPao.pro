@@ -11,7 +11,6 @@ CONFIG += c++11
 SOURCES += \
     bicicletta.cpp \
     bmx.cpp \
-    container.cpp \
     controller.cpp \
     deepptr.cpp \
     main.cpp \

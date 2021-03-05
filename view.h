@@ -54,5 +54,8 @@ public:
     void showInsertDialog();
     void showMezzi(deepPtr<veicolo>, QString, QString=nullptr);
 
+    // non ancora implementato perchè non so come fare, serve quando viene inserito un modello già presente, dovrebbe aggiornare la quantità senza inserire un nuovo campo
+    void updateMezzi(QString modello,int Quantita);
+
 };
 #endif // VIEW_H

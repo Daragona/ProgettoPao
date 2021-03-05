@@ -25,6 +25,11 @@ string veicolo::getMarca() const{
 int veicolo::getQuantita() const{
     return Quantity;
 }
+void veicolo::setQuantita(int qty){
+    Quantity += qty;
+}
+
+
 double veicolo::getPrezzo() const{
     return Price;
 }
@@ -35,6 +40,10 @@ bool veicolo::operator==(veicolo& compare)
     return Marca==compare.Marca && Modello==compare.Modello;
 }
 
+bool veicolo::operator!=(veicolo& compare)
+{
+    return Marca!=compare.Marca || Modello!=compare.Modello;
+}
 //veicolo::veicolo(){
 
 //}

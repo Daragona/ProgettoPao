@@ -25,9 +25,12 @@ public:
     int getQuantita() const;
     double getPrezzo() const;
 
+    void setQuantita(int qty);
+
     void changeQuantity(int);
     void changePrice(double);
     bool operator==(veicolo&);
+    bool operator!=(veicolo&);
 };
 
 #endif // VEICOLO_H
