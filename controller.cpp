@@ -37,6 +37,7 @@ void Controller::importaMezziController()
 
     if(!fileRead.open(QIODevice::ReadOnly | QIODevice::Text)){  // apre il file e controlla se è riuscito ad aprirlo correttamente
         std::cout << "errore: non si apre i file";
+        return;
     }
     val = fileRead.readAll(); // legge il file e lo inserisce dentro la QString "val"
     fileRead.close();   // chiude il file (importante)
@@ -83,12 +84,13 @@ void Controller::importaMezziController()
        }else{
            p=nullptr;
        }
-      model->addVeicolo(p);
-      viewMezzi->showMezzi(p,arrayObject["tipo"].toString(),arrayObject["Path"].toString());
-
+       if(!checkVeicolo(p)){
+             //controlla se esiste un veicolo uguale, se c'è somma le quantità *Nel model* , altrimenti l'aggiunge per la prima volta
+           model->addVeicolo(p);
+           viewMezzi->showMezzi(p,arrayObject["tipo"].toString(),arrayObject["Path"].toString());
+       }
     }
 }
-
 
 void Controller::showMezzi(){
     //viewMezzi->showMezzi();
@@ -165,41 +167,42 @@ void Controller::createVeicolo(QStringList *Lista){
                            (*i++).toDouble(),
                            (*i++).toStdString());
     }
-
-
     deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
 
-    //---
-    bool presente = false;
-    Container<deepPtr<veicolo>>::Iteratore j;
+    if(!checkVeicolo(Nuova)){//Funziona :)
 
-    for(unsigned int i = 0; i < model->veicoli.size(); i++){
-        j = model->veicoli.inizio();
-        deepPtr<veicolo> z(*j);
-
-        if(*j == *ptr){
-            z->setQuantita(Nuova->getQuantita());
-            presente = true;
-        }
-        ++j;
-
-    }
-
-    if(presente != true){
         model->addVeicolo(Nuova);
         viewMezzi->showMezzi(*ptr,Tipo,*i++);
-    }else{
-        // non ancora implementato perchè non so come fare, serve quando viene inserito un modello già presente, dovrebbe aggiornare la quantità senza inserire un nuovo campo
-        // attualmente non fa nulla, infatti c'è un warning che lo segnala, ma il programma funziona lo stesso
-
-        QString modello = QString::fromStdString(Nuova->getModello());
-        viewMezzi->updateMezzi(modello,Nuova->getQuantita());
+        delete ptr;
     }
 
 }
+
+//Controlla se esiste un veicolo con i campi uguali a Nuova, se esiste somma le quantità.
+//**TO DO IMPORTANTE**:         //deve controllare che *j e *Nuova siano 2 veicoli dello stesso tipo
+bool Controller::checkVeicolo(veicolo *Nuova){
+    bool presente = false;
+    deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
+    Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc(); //fixare il copy-ctor (importante, credo)
+
+    while(j!=model->veicoli.finec()){
+        deepPtr<veicolo> z(*j); //Puntatore al veicolo j
+        bool uguali=0;
+        if(typeid(z)==typeid (*ptr)) uguali=1;
+
+        if(uguali && *j==*ptr ){
+            z->setQuantita(Nuova->getQuantita()+z->getQuantita()); //somma quantità
+            presente=true;
+        }
+        j++;
+    };
+    delete ptr;
+
+    return presente;
+}
+//Ritorna false se non trova il veicolo Nuova nella lista veicoli. Se lo trova somma le quantità
 
 void Controller::deleteVeicolo(deepPtr<veicolo> toRemove){
     model->removeVeicolo(toRemove);
 
 }
-

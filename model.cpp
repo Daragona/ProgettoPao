@@ -21,7 +21,8 @@ void Model::importMezzi(){
 
 void Model::addVeicolo(deepPtr<veicolo> toInsert){
     veicoli.push_back(toInsert);
-    auto I=veicoli.inizio();
+
+    //auto I=veicoli.inizio();
 }
 
 void Model::removeVeicolo(deepPtr<veicolo> toRemove){
@@ -34,8 +35,6 @@ void Model::removeVeicolo(deepPtr<veicolo> toRemove){
     for(unsigned int i = 0; i < veicoli.size() && presente != true; i++){
 
         deepPtr<veicolo> z(*j);
-
-        std::cout << z->getModello();
         ++j;
 
     }

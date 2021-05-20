@@ -12,6 +12,10 @@ public:
     double calcolaTax() override;
     Container<string> GetInfo() const override;
     void chiediRicambio() override;
+    virtual ~bmx()=default;
+
+    bool operator==(bmx&);
+
 };
 
 #endif // BMX_H

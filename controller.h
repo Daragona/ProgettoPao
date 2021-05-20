@@ -19,6 +19,7 @@ public:
     void setModel(Model* m);
     void setView(view* v);
     void deleteVeicolo(deepPtr<veicolo> toRemove);
+    bool checkVeicolo(veicolo *ptr);
 public slots:
     void importaMezziController();
     void createVeicolo(QStringList*);

@@ -38,3 +38,10 @@ Container<string> bmx::GetInfo() const{
 void bmx::chiediRicambio() {
 
 }
+
+bool bmx::operator==(bmx& compare)
+{
+    return Pad==compare.Pad && dynamic_cast<veicolo*>(this)==dynamic_cast<veicolo*>(&compare);
+}
+
+

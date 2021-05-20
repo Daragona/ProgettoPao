@@ -76,8 +76,8 @@ void qwidgetveicolo::moreInfoSlot(){
         QLabel *label=new QLabel(QString::fromStdString(*I));
         boxLayout->addWidget(label);
     }
-    QLabel *label=new QLabel(QString::fromStdString(*I));
-    boxLayout->addWidget(label);
+    //QLabel *label=new QLabel(QString::fromStdString(*I));
+    //boxLayout->addWidget(label);
 
 
     QPushButton *chiudi=new QPushButton("Chiudi");

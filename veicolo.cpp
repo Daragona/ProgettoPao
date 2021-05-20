@@ -26,7 +26,7 @@ int veicolo::getQuantita() const{
     return Quantity;
 }
 void veicolo::setQuantita(int qty){
-    Quantity += qty;
+    Quantity = qty;
 }
 
 
@@ -35,14 +35,14 @@ double veicolo::getPrezzo() const{
 }
 
 
-bool veicolo::operator==(veicolo& compare)
+bool veicolo::operator==(veicolo& compare) //checka solo gli attributi di Veicolo non di quelli specifici così -P
 {
-    return Marca==compare.Marca && Modello==compare.Modello;
+    return Marca==compare.Marca && Modello==compare.Modello && Price==compare.Price && Used==compare.Used;
 }
 
 bool veicolo::operator!=(veicolo& compare)
 {
-    return Marca!=compare.Marca || Modello!=compare.Modello;
+    return Marca!=compare.Marca || Modello!=compare.Modello || Price!=compare.Price || Used!=compare.Used;
 }
 //veicolo::veicolo(){
 
