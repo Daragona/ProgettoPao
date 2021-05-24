@@ -12,8 +12,10 @@ protected:
     string collarinoDiChiusura;
     string gripTape;
 public:
-    monopattino(string, string, double, int, bool, string, string, string);
+    monopattino(const string&,const string&,const double&, const int&,const bool&, const string&, const string&, const string&);
     monopattino();
+    virtual ~monopattino()=default;
+    virtual bool operator==(veicolo&) override;
 
     // getter
     string getDeck() const ;

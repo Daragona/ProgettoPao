@@ -1,7 +1,7 @@
 #include "bmx.h"
 #include "container.h"
 
-bmx::bmx(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string Telaio_, string Manubrio_,string Sella_, string Corona_, double diamRuote_,bool pad_):
+bmx::bmx(const string &Marca_,const string &Modello_, const double &Price_, const int &Quantity_, const bool &Used_,const  string &Telaio_, const string &Manubrio_,const string &Sella_, const string &Corona_, const double &diamRuote_,const bool &pad_):
     veicolo(Marca_,Modello_,Price_,Quantity_,Used_),
     bicicletta(Marca_,Modello_,Price_,Quantity_,Used_,Telaio_,Manubrio_,Sella_,Corona_,diamRuote_),
     Pad(pad_){}
@@ -39,9 +39,10 @@ void bmx::chiediRicambio() {
 
 }
 
-bool bmx::operator==(bmx& compare)
-{
-    return Pad==compare.Pad && dynamic_cast<veicolo*>(this)==dynamic_cast<veicolo*>(&compare);
+bool bmx::operator==(veicolo& compare){
+    const bmx* compareCast=dynamic_cast<const bmx*>(&compare);
+    if(!compareCast) return false;
+    return Pad==compareCast->Pad && bicicletta::operator==(compare);
 }
 
 

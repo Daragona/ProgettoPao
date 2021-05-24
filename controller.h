@@ -18,8 +18,8 @@ public:
     explicit Controller(QObject *parent = nullptr);
     void setModel(Model* m);
     void setView(view* v);
-    void deleteVeicolo(deepPtr<veicolo> toRemove);
-    bool checkVeicolo(veicolo *ptr);
+    void deleteVeicolo(deepPtr<veicolo> &toRemove);
+    bool checkVeicolo(deepPtr <veicolo> &ptr);
 public slots:
     void importaMezziController();
     void createVeicolo(QStringList*);

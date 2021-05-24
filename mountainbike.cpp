@@ -2,7 +2,7 @@
 
 
 
-mountainbike::mountainbike(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string Telaio_, string Manubrio_,string Sella_, string Corona_, double diamRuote_, int numMarce_,string Ammortizzatori_):
+mountainbike::mountainbike(const string &Marca_,const string &Modello_, const double &Price_, const int &Quantity_, const bool &Used_,const  string &Telaio_, const string &Manubrio_,const string &Sella_, const string &Corona_, const double &diamRuote_, const int &numMarce_,const string &Ammortizzatori_):
     veicolo(Marca_,Modello_,Price_,Quantity_,Used_),
     bicicletta(Marca_,Modello_,Price_,Quantity_,Used_,Telaio_,Manubrio_,Sella_,Corona_,diamRuote_),
     numMarce(numMarce_),Ammortizzatori(Ammortizzatori_){}
@@ -39,4 +39,10 @@ void mountainbike::chiediRicambio(){
 
 double mountainbike::calcolaTax(){
     return Price*0.10;
+}
+
+bool mountainbike::operator==(veicolo& compare){
+    const mountainbike* compareCast=dynamic_cast<const mountainbike*>(&compare);
+    if(!compareCast) return false;
+    return numMarce==compareCast->numMarce && Ammortizzatori==compareCast->Ammortizzatori && bicicletta::operator==(compare);
 }

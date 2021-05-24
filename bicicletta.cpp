@@ -1,13 +1,11 @@
 #include "bicicletta.h"
 
-bicicletta::bicicletta(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string Telaio_, string Manubrio_,string Sella_, string Corona_, double diamRuote_):
+bicicletta::bicicletta(const string &Marca_,const string &Modello_,const double &Price_, const int &Quantity_, const bool &Used_, const string &Telaio_, const string &Manubrio_,const string &Sella_, const string &Corona_, const double &diamRuote_):
     veicolo(Marca_,Modello_,Price_, Quantity_, Used_),
     Telaio(Telaio_),Manubrio(Manubrio_),Sella(Sella_),Corona(Corona_),diamRuote(diamRuote_)
     {}
 
-bicicletta::bicicletta(string Sella_, string Corona_, double diamRuote_):
-    Sella(Sella_), Corona(Corona_), diamRuote(diamRuote_)
-{}
+
 
 
 string bicicletta::getSella() const{
@@ -22,3 +20,8 @@ double bicicletta::getDiamRuote() const{
     return diamRuote;
 }
 
+bool bicicletta::operator==(veicolo& compare){
+    const bicicletta* compareCast=dynamic_cast<const bicicletta*>(&compare);
+    if(!compareCast) return false;
+    return Telaio==compareCast->Telaio && Manubrio==compareCast->Manubrio && Sella==compareCast->Sella && diamRuote==compareCast->diamRuote && veicolo::operator==(compare);
+}

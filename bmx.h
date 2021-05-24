@@ -6,15 +6,14 @@ class bmx: public bicicletta{
 protected:
     bool Pad;
 public:
-    bmx(string,string,double, int, bool, string, string, string , string , double ,bool);
+    bmx(const string&,const string&,const double&, const int&, const bool&, const string&, const string&, const string &, const string &, const double &,const bool&);
     bmx();
     bool hasPad();
     double calcolaTax() override;
     Container<string> GetInfo() const override;
     void chiediRicambio() override;
-    virtual ~bmx()=default;
 
-    bool operator==(bmx&);
+    bool operator==(veicolo&) override;
 
 };
 

@@ -14,7 +14,7 @@ protected:
     bool Used;
 
 public:
-    veicolo(string,string,double,int,bool);
+    veicolo(const string&, const string&, const double&, const int&, const bool&);
     veicolo();
     virtual Container<string> GetInfo() const =0;
     virtual void chiediRicambio()=0;
@@ -29,7 +29,7 @@ public:
 
     void changeQuantity(int);
     void changePrice(double);
-    bool operator==(veicolo&);
+    virtual bool operator==(veicolo&);
     bool operator!=(veicolo&);
 };
 

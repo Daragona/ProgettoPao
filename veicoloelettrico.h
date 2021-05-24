@@ -10,9 +10,11 @@ protected:
     double oreAutonomia;
 
 public:
-    veicoloElettrico(string, string, double, int, bool,int,double);
+    veicoloElettrico(const string&, const string&, const double&, const int&, const bool&,const int&,const double&);
     veicoloElettrico(int, double);
     veicoloElettrico();
+    virtual ~veicoloElettrico()=default;
+    virtual bool operator==(veicolo&) override;
 
     int getWatt() const ;
     double getAmpere() const ;

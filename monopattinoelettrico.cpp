@@ -1,7 +1,6 @@
 #include "monopattinoelettrico.h"
 
-monopattinoElettrico::monopattinoElettrico(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string deck_, string collarino_, string grip_, int Watt_, double Ampere_, string accelleratore_):
-
+monopattinoElettrico::monopattinoElettrico(const string &Marca_,const string &Modello_, const double &Price_, const int &Quantity_, const bool &Used_, const string& deck_, const string &collarino_, const string &grip_, const int &Watt_, const double &Ampere_, const string &accelleratore_):
     veicolo(Marca_,Modello_,Price_,Quantity_,Used_),
     monopattino(Marca_,Modello_,Price_,Quantity_,Used_,deck_, collarino_,grip_),
     veicoloElettrico(Marca_,Modello_,Price_,Quantity_,Used_,Watt_,Ampere_),
@@ -37,3 +36,8 @@ int monopattinoElettrico::calcolaVelocitaMax() const{
 
 }
 
+bool monopattinoElettrico::operator==(veicolo& compare){
+    const monopattinoElettrico* compareCast=dynamic_cast<const monopattinoElettrico*>(&compare);
+    if(!compareCast) return false;
+    return accelleratore==compareCast->accelleratore && monopattino::operator==(compare) && veicoloElettrico::operator==(compare);
+}

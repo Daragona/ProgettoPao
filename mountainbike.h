@@ -7,8 +7,10 @@ protected:
     int numMarce;
     string Ammortizzatori;
 public:
-    mountainbike(string,string,double, int, bool, string, string,string, string, double, int,string);
+    mountainbike(const string&,const string&,const double&,const int&,const bool&,const string&,const string&, const string&,const string&,const double&,const int&,const string&);
     mountainbike();
+    bool operator==(veicolo&) override;
+
     int getNumMarce();
     string getAmmortizzatori();
     Container<string> GetInfo() const override;

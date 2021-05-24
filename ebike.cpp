@@ -1,6 +1,6 @@
 #include "ebike.h"
 
-ebike::ebike(string Marca_,string Modello_,double Price_, int Quantity_, bool Used_, string Telaio_, string Manubrio_,string Sella_, string Corona_, double diamRuote_,int Watt_, double Ampere_, string Pedalata_, string Sforzo_):
+ebike::ebike(const string &Marca_,const string &Modello_, const double &Price_, const int &Quantity_, const bool &Used_,const  string &Telaio_, const string &Manubrio_,const string &Sella_, const string &Corona_, const double &diamRuote_,const int &Watt_, const double &Ampere_, const string &Pedalata_, const string &Sforzo_):
     veicolo(Marca_,Modello_,Price_,Quantity_,Used_),
     veicoloElettrico(Marca_,Modello_,Price_,Quantity_,Used_,Watt_,Ampere_),
     bicicletta(Marca_,Modello_,Price_,Quantity_,Used_,Telaio_,Manubrio_,Sella_, Corona_,diamRuote_),
@@ -47,4 +47,10 @@ void ebike::chiediRicambio(){
 double ebike::calcolaTax() {
     return Price*0.02;
 
+}
+
+bool ebike::operator==(veicolo& compare){
+    const ebike* compareCast=dynamic_cast<const ebike*>(&compare);
+    if(!compareCast) return false;
+    return SensorePedalata==compareCast->SensorePedalata && SensoreSforzo==compareCast->SensoreSforzo && bicicletta::operator==(compare) && veicoloElettrico::operator==(compare);
 }

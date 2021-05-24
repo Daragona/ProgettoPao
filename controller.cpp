@@ -84,7 +84,10 @@ void Controller::importaMezziController()
        }else{
            p=nullptr;
        }
-       if(!checkVeicolo(p)){
+       deepPtr<veicolo> *ptr=new deepPtr<veicolo>(p);
+
+       if(!checkVeicolo(*ptr)){
+           delete ptr; //Così non da un warning
              //controlla se esiste un veicolo uguale, se c'è somma le quantità *Nel model* , altrimenti l'aggiunge per la prima volta
            model->addVeicolo(p);
            viewMezzi->showMezzi(p,arrayObject["tipo"].toString(),arrayObject["Path"].toString());
@@ -169,8 +172,7 @@ void Controller::createVeicolo(QStringList *Lista){
     }
     deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
 
-    if(!checkVeicolo(Nuova)){//Funziona :)
-
+    if(!checkVeicolo(*ptr)){//Funziona :)
         model->addVeicolo(Nuova);
         viewMezzi->showMezzi(*ptr,Tipo,*i++);
         delete ptr;
@@ -179,30 +181,23 @@ void Controller::createVeicolo(QStringList *Lista){
 }
 
 //Controlla se esiste un veicolo con i campi uguali a Nuova, se esiste somma le quantità.
-//**TO DO IMPORTANTE**:         //deve controllare che *j e *Nuova siano 2 veicoli dello stesso tipo
-bool Controller::checkVeicolo(veicolo *Nuova){
-    bool presente = false;
-    deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
+bool Controller::checkVeicolo(deepPtr<veicolo> &Nuova){
     Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc(); //fixare il copy-ctor (importante, credo)
 
-    while(j!=model->veicoli.finec()){
+    while(j!=model->veicoli.finec()){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
         deepPtr<veicolo> z(*j); //Puntatore al veicolo j
-        bool uguali=0;
-        if(typeid(z)==typeid (*ptr)) uguali=1;
-
-        if(uguali && *j==*ptr ){
+        if(*z==*Nuova ){
             z->setQuantita(Nuova->getQuantita()+z->getQuantita()); //somma quantità
-            presente=true;
+            return true; //Se ha trovato un veicolo uguale, non serve che continua a cercare
         }
         j++;
     };
-    delete ptr;
 
-    return presente;
+    return false;
 }
-//Ritorna false se non trova il veicolo Nuova nella lista veicoli. Se lo trova somma le quantità
+//Ritorna false se non trova il veicolo Nuova nella lista veicoli. Se lo trova somma le quantità e ritorna true
 
-void Controller::deleteVeicolo(deepPtr<veicolo> toRemove){
+void Controller::deleteVeicolo(deepPtr<veicolo> &toRemove){
     model->removeVeicolo(toRemove);
 
 }
