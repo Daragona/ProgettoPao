@@ -23,7 +23,6 @@ private:
 public:
 //    Container();
 //    Container(const T&);
-//    Container(const Container&);
 //    ~Container();
 
     Container& operator=(const Container&);
@@ -31,6 +30,7 @@ public:
     unsigned int size();
 
     Container();
+    Container(const Container&);
 
     void push_back(T p);
     void deleteNodo(T toRemove);
@@ -43,6 +43,8 @@ public:
         bool past_the_end;
         Iteratore(nodo * );
     public:
+        Iteratore(const Iteratore&);
+
         Iteratore();
         Iteratore operator=(const Iteratore &);
         Iteratore &operator++();
@@ -62,8 +64,11 @@ public:
         const nodo * puntatore;
         bool past_the_end;
         Const_Iteratore(nodo * );
+
     public:
+        Const_Iteratore(const Const_Iteratore&);
         Const_Iteratore();
+
         Const_Iteratore operator=(const Const_Iteratore &);
         Const_Iteratore &operator++();
         Const_Iteratore &operator++(int);
@@ -121,7 +126,13 @@ template <class T>
 Container<T>::Container() : primo(nullptr), ultimo(nullptr), length(0){};
 
 template <class T>
+Container<T>::Container(const Container& c) : primo(c.primo), ultimo(c.ultimo), length(c.length){}
+
+template <class T>
 Container<T>::Iteratore::Iteratore(nodo * p) : puntatore(p) {}
+
+template <class T>
+Container<T>::Iteratore::Iteratore(const Iteratore& p) : puntatore(p.puntatore) {}
 
 template <class T>
 Container<T>::Iteratore::Iteratore() : puntatore(nullptr) {}
@@ -188,7 +199,12 @@ template <class T>
 Container<T>::Const_Iteratore::Const_Iteratore(nodo * p) : puntatore(p) {}
 
 template <class T>
+Container<T>::Const_Iteratore::Const_Iteratore(const Const_Iteratore& p) : puntatore(p.puntatore) {}
+
+
+template <class T>
 Container<T>::Const_Iteratore::Const_Iteratore() : puntatore(nullptr) {}
+
 
 template <class T>
 typename Container<T>::Const_Iteratore Container<T>::Const_Iteratore::operator=(const Const_Iteratore & cit){

@@ -114,7 +114,7 @@ void view::setController(Controller *c)
 // metodo per la creazione dell'oggetto
 void view::showMezzi(deepPtr<veicolo> toInsert, QString Tipo, QString path){
     qwidgetveicolo *item=new qwidgetveicolo(toInsert,path,this,ctrl);
-    item->setMaximumHeight(100);
+    item->setMaximumHeight(110);
     item->setStyleSheet("background-color:white; border:1px solid black");
     if(Tipo=="E-Bike" || Tipo =="Monopattino Elettrico"){
         veicoloElettricoList->widget()->layout()->addWidget(item);

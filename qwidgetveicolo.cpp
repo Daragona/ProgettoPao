@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 
-qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *parent, Controller *c) : QWidget(dynamic_cast<QWidget*>(parent)), ptrVeicolo(toInsert), vista(parent), ctrl(c){
+qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *parent, Controller *c) : QWidget(dynamic_cast<QWidget*>(parent)), ptrVeicolo(toInsert), ctrl(c),vista(parent){
     QGridLayout* itemLayout = new QGridLayout; //Layout centrale del programma
     QFrame *item=new QFrame;
     QLabel *imageLabel = new QLabel;

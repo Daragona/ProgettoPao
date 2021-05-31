@@ -182,7 +182,7 @@ void Controller::createVeicolo(QStringList *Lista){
 
 //Controlla se esiste un veicolo con i campi uguali a Nuova, se esiste somma le quantità.
 bool Controller::checkVeicolo(deepPtr<veicolo> &Nuova){
-    Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc(); //fixare il copy-ctor (importante, credo)
+    Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc(); //fixare il copy-ctor (da warning)
 
     while(j!=model->veicoli.finec()){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
         deepPtr<veicolo> z(*j); //Puntatore al veicolo j
