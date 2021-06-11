@@ -20,6 +20,7 @@ public:
     bool checkVeicolo(deepPtr <veicolo> &ptr)const;
 public slots:
     void importaMezziController();
+    void esportaMezziController();
     void createVeicolo(QStringList*);
 };
 

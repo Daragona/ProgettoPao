@@ -261,7 +261,7 @@ typename Container<T>::Const_Iteratore Container<T>::inizioc() const
 template<class T>
 typename Container<T>::Const_Iteratore Container<T>::finec() const
 {
-    return Const_Iteratore(nullptr);
+    return Const_Iteratore(ultimo);
 }
 
 #endif // CONTAINER_H

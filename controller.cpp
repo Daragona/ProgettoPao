@@ -95,6 +95,48 @@ void Controller::importaMezziController()
     }
 }
 
+void Controller::esportaMezziController(){
+    QString val;
+    QString path ="VeicoliEsportati.json"; //Risolto così
+    QFile exportFile(path);
+
+    exportFile.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream out(&exportFile);   // serve a gestire i flussi di testo siccome il metodo file.write non accetta le stringhe (out << String --> scrive sul file)
+
+    val = "{\n \"arrayMezzi\": [";
+    out << val;
+
+    Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc();
+
+    Container<deepPtr<veicolo>>::Const_Iteratore fine; // mi serve per simulare null nella condizione
+
+    while(j!=fine){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
+        deepPtr<veicolo> z(*j); //Puntatore al veicolo j-esimo
+        val = "\n{\n";
+        val = val + "\"Marca\": \" " + QString::fromStdString(z->getMarca()) + "\",\n";
+        val = val + "\"Modello\": \" " + QString::fromStdString(z->getModello()) + "\",\n";
+        val = val + "\"Quantita\": \" " + QString::number(z->getQuantita()) + "\",\n";
+        val = val + "\"Prezzo\": \" " + QString::number(z->getPrezzo()) + "\"\n";
+        if(j != model->veicoli.finec())
+            val = val + "},\n";
+        else
+            val = val + "}\n";
+
+
+
+        out << val;
+
+        j++;
+    };
+
+    val = "] \n }";
+    out << val;
+
+    exportFile.close();
+
+}
+
+
 void Controller::createVeicolo(QStringList *Lista){
     QStringList::iterator i;
 
@@ -180,7 +222,8 @@ void Controller::createVeicolo(QStringList *Lista){
 bool Controller::checkVeicolo(deepPtr<veicolo> &Nuova) const {
     Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc();
 
-    while(j!=model->veicoli.finec()){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
+    Container<deepPtr<veicolo>>::Const_Iteratore fine; // mi serve per simulare null nella condizione
+    while(j!=fine){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
         deepPtr<veicolo> z(*j); //Puntatore al veicolo j-esimo
         if(*z==*Nuova ){
             z->setQuantita(Nuova->getQuantita()+z->getQuantita()); //somma quantità

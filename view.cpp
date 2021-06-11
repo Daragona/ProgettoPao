@@ -92,8 +92,12 @@ view::view(QWidget *parent): QWidget(parent) {
 
     Importa = new QPushButton("Importa");
     Importa->setFixedSize(60,40);
+    Esporta = new QPushButton("Esporta");
+    Esporta->setFixedSize(60,40);
+
     screenLayout->addWidget(Inserisci,3,1);
     screenLayout->addWidget(Importa,1,2);
+    screenLayout->addWidget(Esporta,1,3);
     setLayout(screenLayout);
 }
 
@@ -105,6 +109,7 @@ void view::setController(Controller *c)
     ctrl = c;
     connect(Importa, SIGNAL(clicked()), ctrl, SLOT(importaMezziController()));
     connect(Inserisci, &QPushButton::released, this, &view::showInsertDialog);
+    connect(Esporta, SIGNAL(clicked()), ctrl, SLOT(esportaMezziController()));
 
 }
 

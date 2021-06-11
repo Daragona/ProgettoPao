@@ -38,6 +38,7 @@ private:
     Controller *ctrl;
 
     QPushButton *Importa;
+    QPushButton *Esporta;
     QPushButton *Inserisci;
 
     QWidget InsertPage;

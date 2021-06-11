@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.0, 2021-03-05T10:25:38. -->
+<!-- Written by QtCreator 4.14.0, 2021-06-11T19:12:29. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -298,6 +298,7 @@
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory">C:/Users/Claudio/Documents/GitHub/ProgettoPao</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/Claudio/Documents/GitHub/build-ProgettoPao-Desktop_Qt_5_15_2_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
