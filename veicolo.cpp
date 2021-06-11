@@ -5,16 +5,6 @@ veicolo::veicolo(const string &Marca_,const string &Modello_, const double &Pric
 veicolo::veicolo(){
 
 }
-void veicolo::changeQuantity(int NewQ){
-    if(NewQ>=0){
-        Quantity=NewQ;
-    }
-}
-void veicolo::changePrice(double NewP){
-    if(NewP>0){
-        Price=NewP;
-    }
-}
 
 string veicolo::getModello() const{
     return Modello;
@@ -35,12 +25,12 @@ double veicolo::getPrezzo() const{
 }
 
 
-bool veicolo::operator==(veicolo& compare)
+bool veicolo::operator==(veicolo& compare)const
 {
     return Marca==compare.Marca && Modello==compare.Modello && Price==compare.Price && Used==compare.Used;
 }
 
-bool veicolo::operator!=(veicolo& compare)
+bool veicolo::operator!=(veicolo& compare)const
 {
     return Marca!=compare.Marca || Modello!=compare.Modello || Price!=compare.Price || Used!=compare.Used;
 }

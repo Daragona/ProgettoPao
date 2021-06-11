@@ -33,15 +33,12 @@ Container<string> mountainbike::GetInfo() const{
     return strVec;
 }
 
-void mountainbike::chiediRicambio(){
 
-};
-
-double mountainbike::calcolaTax(){
+double mountainbike::calcolaTax()const{
     return Price*0.10;
 }
 
-bool mountainbike::operator==(veicolo& compare){
+bool mountainbike::operator==(veicolo& compare)const{
     const mountainbike* compareCast=dynamic_cast<const mountainbike*>(&compare);
     if(!compareCast) return false;
     return numMarce==compareCast->numMarce && Ammortizzatori==compareCast->Ammortizzatori && bicicletta::operator==(compare);

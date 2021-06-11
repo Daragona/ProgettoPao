@@ -5,13 +5,14 @@
 #include <QLabel>
 #include <QPushButton>
 
-qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *parent, Controller *c) : QWidget(dynamic_cast<QWidget*>(parent)), ptrVeicolo(toInsert), ctrl(c),vista(parent){
-    QGridLayout* itemLayout = new QGridLayout; //Layout centrale del programma
-    QFrame *item=new QFrame;
+qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo>& toInsert, QString path, view *parent, Controller *c, QString Tipo) : QWidget(dynamic_cast<QWidget*>(parent)), ptrVeicolo(toInsert), ctrl(c),vista(parent){
+    QVBoxLayout* itemLayout= new QVBoxLayout;//Layout centrale del programma
+    QFrame *itemFrame=new QFrame;
     QLabel *imageLabel = new QLabel;
     imageLabel->setFixedSize(70,70);
 
     QImage image=(new QImage(path))->scaled(imageLabel->width(),imageLabel->height());
+
     imageLabel->setPixmap(QPixmap::fromImage(image));
     imageLabel->setStyleSheet(" border:1px solid black");
 
@@ -21,33 +22,50 @@ qwidgetveicolo::qwidgetveicolo(deepPtr<veicolo> toInsert, QString path, view *pa
     QLabel* modelloItem = new QLabel;
     modelloItem->setText(QString::fromStdString(ptrVeicolo->getModello()));
 
-    QLabel* quantitaItem = new QLabel;
-    quantitaItem-> setText("Stock: "+QString::number(ptrVeicolo->getQuantita()));
+    QLabel* tipoItem = new QLabel;
+    tipoItem-> setText(Tipo);
     QLabel* prezzoItem = new QLabel;
     prezzoItem-> setText(QString::number(ptrVeicolo->getPrezzo())+"€");
 
     QPushButton *deleteButton = new QPushButton("&Delete");
+    deleteButton->setFixedWidth(70);
     QPushButton *moreInfoButton = new QPushButton("&More info");
+    moreInfoButton->setFixedWidth(70);
     connect(deleteButton, &QPushButton::released, this, &qwidgetveicolo::deleteSlot);
     connect(moreInfoButton, &QPushButton::released, this, &qwidgetveicolo::moreInfoSlot);
 
+    itemLayout->addWidget(tipoItem);
+    QHBoxLayout *riga2L=new QHBoxLayout;
 
-    itemLayout->addWidget(imageLabel,0,0,0,0);
-    itemLayout->addWidget(marcaItem,0,1);
-    itemLayout->addWidget(modelloItem,0,2);
-    itemLayout->addWidget(quantitaItem,1,1);
-    itemLayout->addWidget(prezzoItem,1,2);
+    QVBoxLayout *contenutoL=new QVBoxLayout();
 
-    itemLayout->addWidget(deleteButton,0,3);
-    itemLayout->addWidget(moreInfoButton,1,3);
+    QHBoxLayout *riga1CL=new QHBoxLayout;
+    riga1CL->addWidget(marcaItem);
+    riga1CL->addWidget(modelloItem);
 
-    item->setLayout(itemLayout);
-    QVBoxLayout *total=new QVBoxLayout;
-    total->addWidget(item);
-    total->setSpacing(10);
+    contenutoL->addLayout(riga1CL);
+    contenutoL->addWidget(prezzoItem);
 
-    this->setLayout(total);
-    this->setFixedHeight(110);
+    QVBoxLayout *bottoniLayout=new QVBoxLayout;
+    bottoniLayout->addWidget(deleteButton);
+    bottoniLayout->addWidget(moreInfoButton);
+
+
+    riga2L->addWidget(imageLabel);
+    riga2L->addLayout(contenutoL);
+    riga2L->addLayout(bottoniLayout);
+
+
+    itemLayout->addLayout(riga2L);
+
+
+    itemFrame->setLayout(itemLayout);
+
+    QVBoxLayout *layoutFinale=new QVBoxLayout;
+    layoutFinale->addWidget(itemFrame);
+
+    this->setLayout(layoutFinale);
+    this->setFixedHeight(140);
     this->setStyleSheet("border:1px solid black");
 
 }
@@ -71,14 +89,13 @@ void qwidgetveicolo::moreInfoSlot(){
     mainLayout->addWidget(groupBox);
 
     Container<string> values=ptrVeicolo->GetInfo();
-    Container<string>::Iteratore I;
-    for(I=values.inizio();I!=values.fine();I++){
+    Container<string>::Const_Iteratore I;
+    for(I=values.inizioc(); I!=values.finec(); I++){
         QLabel *label=new QLabel(QString::fromStdString(*I));
         boxLayout->addWidget(label);
     }
-    //QLabel *label=new QLabel(QString::fromStdString(*I));
-    //boxLayout->addWidget(label);
-
+    QLabel *label =new QLabel("Tassazione: "+QString::number(ptrVeicolo->calcolaTax())+"€");
+    boxLayout->addWidget(label);
 
     QPushButton *chiudi=new QPushButton("Chiudi");
     mainLayout->addWidget(chiudi);

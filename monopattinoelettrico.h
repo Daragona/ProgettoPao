@@ -11,13 +11,11 @@ protected:
 public:
     monopattinoElettrico(const string&, const string&, const double&,const  int&, const bool&, const string&, const string&, const string&, const int&, const double&, const string&);
     monopattinoElettrico();
-    bool operator==(veicolo&) override;
+    bool operator==(veicolo&) const override;
 
     string getAccelleratore() const;
     Container<string> GetInfo() const override ;
-    void chiediRicambio() override ;
-    double calcolaTax() override ;
-    int calcolaVelocitaMax() const override ;
+    double calcolaTax() const override ;
 
 };
 

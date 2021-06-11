@@ -17,7 +17,7 @@ public:
     double getDiamRuote() const;
     virtual ~bicicletta()=default;
 
-    virtual bool operator==(veicolo&) override;
+    virtual bool operator==(veicolo&) const override;
 
 };
 

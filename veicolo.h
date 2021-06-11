@@ -17,20 +17,17 @@ public:
     veicolo(const string&, const string&, const double&, const int&, const bool&);
     veicolo();
     virtual Container<string> GetInfo() const =0;
-    virtual void chiediRicambio()=0;
-    virtual double calcolaTax() =0;
+    virtual double calcolaTax()const =0;
     virtual ~veicolo()=default;
     string getModello() const;
     string getMarca() const;
     int getQuantita() const;
     double getPrezzo() const;
 
-    void setQuantita(int qty);
+    void setQuantita(int);
 
-    void changeQuantity(int);
-    void changePrice(double);
-    virtual bool operator==(veicolo&);
-    bool operator!=(veicolo&);
+    virtual bool operator==(veicolo&)const;
+    bool operator!=(veicolo&)const;
 };
 
 #endif // VEICOLO_H

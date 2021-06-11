@@ -14,11 +14,10 @@ public:
     veicoloElettrico(int, double);
     veicoloElettrico();
     virtual ~veicoloElettrico()=default;
-    virtual bool operator==(veicolo&) override;
+    virtual bool operator==(veicolo&) const override;
 
     int getWatt() const ;
     double getAmpere() const ;
-    virtual int calcolaVelocitaMax() const =0;
 
 };
 

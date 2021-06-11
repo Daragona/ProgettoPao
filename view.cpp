@@ -87,14 +87,11 @@ view::view(QWidget *parent): QWidget(parent) {
     screenLayout->addWidget(veicoloList,2,0);
     screenLayout->addWidget(veicoloElettricoList,2,1);
 
-    Usato = new QPushButton("&Usato", this);
-    Usato->setFixedHeight(35);
     Inserisci = new QPushButton("&Inserisci", this);
     Inserisci->setFixedHeight(35);
 
     Importa = new QPushButton("Importa");
     Importa->setFixedSize(60,40);
-    screenLayout->addWidget(Usato,3,0);
     screenLayout->addWidget(Inserisci,3,1);
     screenLayout->addWidget(Importa,1,2);
     setLayout(screenLayout);
@@ -113,23 +110,20 @@ void view::setController(Controller *c)
 
 // metodo per la creazione dell'oggetto
 void view::showMezzi(deepPtr<veicolo> toInsert, QString Tipo, QString path){
-    qwidgetveicolo *item=new qwidgetveicolo(toInsert,path,this,ctrl);
-    item->setMaximumHeight(110);
+    qwidgetveicolo *item=new qwidgetveicolo(toInsert,path,this,ctrl,Tipo);
+    item->setMaximumHeight(140);
     item->setStyleSheet("background-color:white; border:1px solid black");
     if(Tipo=="E-Bike" || Tipo =="Monopattino Elettrico"){
         veicoloElettricoList->widget()->layout()->addWidget(item);
-        veicoloElettricoList->widget()->setFixedHeight(veicoloElettricoList->widget()->layout()->count()*110+10);
+        veicoloElettricoList->widget()->setFixedHeight(veicoloElettricoList->widget()->layout()->count()*140+10);
 
     }else{
         veicoloList->widget()->layout()->addWidget(item);
-        veicoloList->widget()->setFixedHeight(veicoloList->widget()->layout()->count()*110+10);
+        veicoloList->widget()->setFixedHeight(veicoloList->widget()->layout()->count()*140+10);
     }
 }
 
-// non ancora implementato perchè non so come fare, serve quando viene inserito un modello già presente, dovrebbe aggiornare la quantità senza inserire un nuovo campo
-void view::updateMezzi(QString modello,int Quantita){
 
-}
 
 // quando clicchi sul bottone inserisci
 void view::showInsertDialog(){

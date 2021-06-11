@@ -10,14 +10,12 @@ protected:
 public:
     ebike(const string&,const string&,const double&, const int&, const bool&, const string&, const string&, const string&, const string&, const double&, const int&, const double&, const string&, const string&);
     ebike();
-    bool operator==(veicolo&) override;
+    bool operator==(veicolo&) const override;
 
     string getPedalata() const;
     string getSforzo() const;
-    double calcolaTax() override;
+    double calcolaTax() const override;
     Container<string> GetInfo() const override;
-    void chiediRicambio() override;
-    int calcolaVelocitaMax() const override;
 
 
 };

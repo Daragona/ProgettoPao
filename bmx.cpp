@@ -7,12 +7,12 @@ bmx::bmx(const string &Marca_,const string &Modello_, const double &Price_, cons
     Pad(pad_){}
 
 
-bool bmx::hasPad(){
+bool bmx::hasPad()const{
     return Pad;
 }
 
-double bmx::calcolaTax(){
-    return Price*0.90;
+double bmx::calcolaTax()const{
+    return Price*0.20;
 }
 
 
@@ -21,7 +21,6 @@ Container<string> bmx::GetInfo() const{
     strVec.push_back("Marca: "+Marca);
     strVec.push_back("Modello: "+Modello);
     strVec.push_back("Prezzo: "+std::to_string(Price)+" €");
-
 
     strVec.push_back("Quantità: "+std::to_string(Quantity)+" pz");
     if(Used)    strVec.push_back("Usata: Si");
@@ -35,11 +34,8 @@ Container<string> bmx::GetInfo() const{
     else        strVec.push_back("Pad: No");
     return strVec;
 }
-void bmx::chiediRicambio() {
 
-}
-
-bool bmx::operator==(veicolo& compare){
+bool bmx::operator==(veicolo& compare)const{
     const bmx* compareCast=dynamic_cast<const bmx*>(&compare);
     if(!compareCast) return false;
     return Pad==compareCast->Pad && bicicletta::operator==(compare);

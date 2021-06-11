@@ -14,7 +14,7 @@ int veicoloElettrico::getWatt() const { return Watt; }
 
 double veicoloElettrico::getAmpere() const { return Ampere; }
 
-bool veicoloElettrico::operator==(veicolo& compare) {
+bool veicoloElettrico::operator==(veicolo& compare) const{
     const veicoloElettrico* compareCast=dynamic_cast<const veicoloElettrico*>(&compare);
     if(!compareCast) return false;
     return Watt==compareCast->Watt && Ampere==compareCast->Ampere && veicolo::operator==(compare);

@@ -16,9 +16,7 @@ string ebike::getSforzo() const{
     return SensoreSforzo;
 }
 
-int ebike::calcolaVelocitaMax() const{
-    return 1;
-}
+
 
 Container<string> ebike::GetInfo() const{
     Container<string> strVec;
@@ -40,16 +38,13 @@ Container<string> ebike::GetInfo() const{
     return strVec;
 }
 
-void ebike::chiediRicambio(){
 
-}
-
-double ebike::calcolaTax() {
+double ebike::calcolaTax() const{
     return Price*0.02;
 
 }
 
-bool ebike::operator==(veicolo& compare){
+bool ebike::operator==(veicolo& compare)const{
     const ebike* compareCast=dynamic_cast<const ebike*>(&compare);
     if(!compareCast) return false;
     return SensorePedalata==compareCast->SensorePedalata && SensoreSforzo==compareCast->SensoreSforzo && bicicletta::operator==(compare) && veicoloElettrico::operator==(compare);

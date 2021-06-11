@@ -52,7 +52,7 @@ void Controller::importaMezziController()
     for(int i = 0; i < JSONarray.size(); i++){
        QJsonObject arrayObject = JSONarray[i].toObject();
         veicolo *p;
-       if(arrayObject["tipo"] == "mountainbike"){ // crea oggetto mountainbike
+       if(arrayObject["tipo"] == "Mountain-Bike"){ // crea oggetto mountainbike
            p = new mountainbike(
                        arrayObject["Marca"].toString().toStdString()
                      , arrayObject["Modello"].toString().toStdString()
@@ -66,7 +66,7 @@ void Controller::importaMezziController()
                      , arrayObject["dimRuote"].toDouble()
                      , arrayObject["numMarce"].toInt()
                      , arrayObject["Ammortizzatori"].toString().toStdString());
-       }else    if(arrayObject["tipo"] == "bmx"){ // crea oggetto bmx
+       }else    if(arrayObject["tipo"] == "BMX"){ // crea oggetto bmx
           p= new bmx(
                       arrayObject["Marca"].toString().toStdString()
                     , arrayObject["Modello"].toString().toStdString()
@@ -79,7 +79,7 @@ void Controller::importaMezziController()
                     , arrayObject["Corona"].toString().toStdString()
                     , arrayObject["dimRuote"].toDouble()
                     , arrayObject["Pad"].toInt());
-      }else if(arrayObject["tipo"] == "e-bike"){
+      }else if(arrayObject["tipo"] == "E-Bike"){
            p=nullptr;
        }else{
            p=nullptr;
@@ -94,10 +94,6 @@ void Controller::importaMezziController()
        }
     }
 }
-
-void Controller::showMezzi(){
-    //viewMezzi->showMezzi();
-};
 
 void Controller::createVeicolo(QStringList *Lista){
     QStringList::iterator i;
@@ -181,11 +177,11 @@ void Controller::createVeicolo(QStringList *Lista){
 }
 
 //Controlla se esiste un veicolo con i campi uguali a Nuova, se esiste somma le quantità.
-bool Controller::checkVeicolo(deepPtr<veicolo> &Nuova){
-    Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc(); //fixare il copy-ctor (da warning)
+bool Controller::checkVeicolo(deepPtr<veicolo> &Nuova) const {
+    Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc();
 
     while(j!=model->veicoli.finec()){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
-        deepPtr<veicolo> z(*j); //Puntatore al veicolo j
+        deepPtr<veicolo> z(*j); //Puntatore al veicolo j-esimo
         if(*z==*Nuova ){
             z->setQuantita(Nuova->getQuantita()+z->getQuantita()); //somma quantità
             return true; //Se ha trovato un veicolo uguale, non serve che continua a cercare

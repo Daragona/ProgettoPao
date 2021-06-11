@@ -15,7 +15,7 @@ public:
     monopattino(const string&,const string&,const double&, const int&,const bool&, const string&, const string&, const string&);
     monopattino();
     virtual ~monopattino()=default;
-    virtual bool operator==(veicolo&) override;
+    virtual bool operator==(veicolo&)  const override;
 
     // getter
     string getDeck() const ;

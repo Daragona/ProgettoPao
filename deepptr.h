@@ -28,12 +28,6 @@ deepPtr<T>::deepPtr(const deepPtr& dptr){
     else
         pter = dptr.pter;
 }
-/*bho da segmentation fault
-template <class T>
-deepPtr<T>::~deepPtr(){
-    if(pter)
-        delete pter;
-}*/
 
 template <class T>
 deepPtr<T>::operator T *() const{

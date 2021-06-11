@@ -20,7 +20,7 @@ double bicicletta::getDiamRuote() const{
     return diamRuote;
 }
 
-bool bicicletta::operator==(veicolo& compare){
+bool bicicletta::operator==(veicolo& compare)const{
     const bicicletta* compareCast=dynamic_cast<const bicicletta*>(&compare);
     if(!compareCast) return false;
     return Telaio==compareCast->Telaio && Manubrio==compareCast->Manubrio && Sella==compareCast->Sella && diamRuote==compareCast->diamRuote && veicolo::operator==(compare);

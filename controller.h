@@ -12,14 +12,12 @@ class Controller : public QObject
 private:
     view* viewMezzi;
     Model* model;
-    void showMezzi();
-
 public:
     explicit Controller(QObject *parent = nullptr);
     void setModel(Model* m);
     void setView(view* v);
     void deleteVeicolo(deepPtr<veicolo> &toRemove);
-    bool checkVeicolo(deepPtr <veicolo> &ptr);
+    bool checkVeicolo(deepPtr <veicolo> &ptr)const;
 public slots:
     void importaMezziController();
     void createVeicolo(QStringList*);

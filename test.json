@@ -1,6 +1,6 @@
 {
 "arrayMezzi" : [{
-      "tipo" : "mountainbike",
+      "tipo" : "Mountain-Bike",
       "Sella": "Sella",
       "Corona": "Corona",
       "diamRuote": 12.2,
@@ -16,7 +16,7 @@
       "Path": "images/mountain-bike1.jpg"
    },
    {
-      "tipo" : "bmx",
+      "tipo" : "BMX",
       "Sella": "Sella",
       "Corona": "Corona",
       "diamRuote": 12.2,

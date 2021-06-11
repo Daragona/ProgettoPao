@@ -8,12 +8,11 @@ protected:
 public:
     bmx(const string&,const string&,const double&, const int&, const bool&, const string&, const string&, const string &, const string &, const double &,const bool&);
     bmx();
-    bool hasPad();
-    double calcolaTax() override;
+    bool hasPad()const;
+    double calcolaTax()const override;
     Container<string> GetInfo() const override;
-    void chiediRicambio() override;
 
-    bool operator==(veicolo&) override;
+    bool operator==(veicolo&) const override;
 
 };
 

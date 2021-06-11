@@ -9,13 +9,12 @@ protected:
 public:
     mountainbike(const string&,const string&,const double&,const int&,const bool&,const string&,const string&, const string&,const string&,const double&,const int&,const string&);
     mountainbike();
-    bool operator==(veicolo&) override;
+    bool operator==(veicolo&)  const override;
 
     int getNumMarce();
     string getAmmortizzatori();
     Container<string> GetInfo() const override;
-    void chiediRicambio() override;
-    double calcolaTax() override;
+    double calcolaTax()const override;
 
 };
 

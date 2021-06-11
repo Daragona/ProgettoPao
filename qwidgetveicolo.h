@@ -18,7 +18,7 @@ private:
 
 public:
     view vista;
-    qwidgetveicolo(deepPtr<veicolo>, QString=nullptr,view *parent=nullptr, Controller *c= nullptr);
+    qwidgetveicolo(deepPtr<veicolo>&, QString=nullptr,view *parent=nullptr, Controller *c= nullptr, QString Tipo=nullptr);
 
 signals:
 

@@ -26,17 +26,14 @@ Container<string> monopattinoElettrico::GetInfo() const{
     strVec.push_back("Accelleratore: "+accelleratore);
     return strVec;
 }
-void monopattinoElettrico::chiediRicambio(){ }
 
-double monopattinoElettrico::calcolaTax() {
-    return Price*0.95;
-
-}
-int monopattinoElettrico::calcolaVelocitaMax() const{
+double monopattinoElettrico::calcolaTax()const {
+    return 0;
 
 }
 
-bool monopattinoElettrico::operator==(veicolo& compare){
+
+bool monopattinoElettrico::operator==(veicolo& compare)const{
     const monopattinoElettrico* compareCast=dynamic_cast<const monopattinoElettrico*>(&compare);
     if(!compareCast) return false;
     return accelleratore==compareCast->accelleratore && monopattino::operator==(compare) && veicoloElettrico::operator==(compare);
