@@ -126,6 +126,7 @@ void view::showMezzi(deepPtr<veicolo> toInsert, QString Tipo, QString path){
         veicoloList->widget()->layout()->addWidget(item);
         veicoloList->widget()->setFixedHeight(veicoloList->widget()->layout()->count()*140+10);
     }
+
 }
 
 

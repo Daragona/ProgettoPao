@@ -11,8 +11,9 @@ CONFIG += c++11
 SOURCES += \
     bicicletta.cpp \
     bmx.cpp \
-    controller.cpp \
     deepptr.cpp \
+    container.cpp \
+    controller.cpp \
     main.cpp \
     mainwindow.cpp \
     model.cpp \
@@ -30,9 +31,9 @@ SOURCES += \
 HEADERS += \
     bicicletta.h \
     bmx.h \
+    deepptr.h \
     container.h \
     controller.h \
-    deepptr.h \
     mainwindow.h \
     model.h \
     mountainbike.h \

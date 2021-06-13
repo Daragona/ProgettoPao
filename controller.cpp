@@ -17,8 +17,6 @@
 #include <QDir>
 Controller::Controller(QObject *parent) : QObject(parent)
 {
-//    std::cout << "funziona";
-//    viewMezzi->showMezzi();
 
 }
 
@@ -52,7 +50,7 @@ void Controller::importaMezziController()
        QJsonObject arrayObject = JSONarray[i].toObject();
         veicolo *p;
 
-       if(arrayObject["Tipo"] == "mountainbike"){ // crea oggetto mountainbike
+       if(arrayObject["Tipo"] == "Mountain-Bike"){ // crea oggetto mountainbike
            p = new mountainbike(
                        arrayObject["Marca"].toString().toStdString()
                      , arrayObject["Modello"].toString().toStdString()
@@ -66,7 +64,7 @@ void Controller::importaMezziController()
                      , arrayObject["Diametro"].toDouble()
                      , arrayObject["Marce"].toInt()
                      , arrayObject["Ammortizzatori"].toString().toStdString());
-       }else    if(arrayObject["Tipo"] == "bmx"){ // crea oggetto bmx
+       }else    if(arrayObject["Tipo"] == "BMX"){ // crea oggetto bmx
           p= new bmx(
                       arrayObject["Marca"].toString().toStdString()
                     , arrayObject["Modello"].toString().toStdString()
@@ -79,7 +77,7 @@ void Controller::importaMezziController()
                     , arrayObject["Corona"].toString().toStdString()
                     , arrayObject["Diametro"].toDouble()
                     , arrayObject["Pad"].toInt());
-      }else if(arrayObject["Tipo"] == "ebike"){
+      }else if(arrayObject["Tipo"] == "E-Bike"){
            p= new ebike(
                        arrayObject["Marca"].toString().toStdString()
                      , arrayObject["Modello"].toString().toStdString()
@@ -96,7 +94,7 @@ void Controller::importaMezziController()
                    , arrayObject["Sens. Pedalata"].toString().toStdString()
                    , arrayObject["Sens. Sforzo"].toString().toStdString());
 
-       }else if(arrayObject["Tipo"] == "monopattinoelettrico"){
+       }else if(arrayObject["Tipo"] == "Monopattino Elettrico"){
            p = new monopattinoElettrico(
                 arrayObject["Marca"].toString().toStdString()
                 , arrayObject["Modello"].toString().toStdString()
@@ -109,12 +107,12 @@ void Controller::importaMezziController()
                 , arrayObject["Watt"].toInt()
                 , arrayObject["Ampere"].toDouble()
                 , arrayObject["Accelleratore"].toString().toStdString());
-       }
+       }else return;
 
        deepPtr<veicolo> *ptr=new deepPtr<veicolo>(p);
 
        if(!checkVeicolo(*ptr)){
-           delete ptr; //Così non da un warning
+           delete ptr;
              //controlla se esiste un veicolo uguale, se c'è somma le quantità *Nel model* , altrimenti l'aggiunge per la prima volta
            model->addVeicolo(p);
            viewMezzi->showMezzi(p,arrayObject["Tipo"].toString(),arrayObject["Path"].toString());
@@ -124,7 +122,7 @@ void Controller::importaMezziController()
 
 void Controller::esportaMezziController(){
     QString val;
-    QString path ="VeicoliEsportati.json"; //Risolto così
+    QString path ="test.json"; //Risolto così
     QFile exportFile(path);
 
     exportFile.open(QIODevice::WriteOnly | QIODevice::Text);

@@ -1,18 +1,33 @@
 {
-   "arrayMezzi": [
-  {
-  "Tipo": "monopattinoelettrico",
-  "Marca": "Marca",
-  "Modello": "Modello",
-  "Prezzo": 0.000000,
-  "Quantita": 1,
-  "Usata":0,
-  "Deck": "Deck",
-  "Collarino": "Collarino",
-  "Grip": "Grip",
-  "Watt": 0,
-  "Ampere": 0.000000,
-  "Accelleratore": "Accelleratore"
-  }
-  ] 
-   }
+ "arrayMezzi": [
+{
+"Tipo": "BMX",
+"Marca": "Marca",
+"Modello": "Modello",
+"Prezzo": 0.000000,
+"Quantita": 6,
+"Usata":0,
+"Telaio": "Telaio",
+"Manubrio": "Manubrio",
+"Sella": "Sella",
+"Corona": "Corona",
+"Diametro": 0.000000,
+"Pad":0
+},
+
+{
+"Tipo": "Monopattino Elettrico",
+"Marca": "Marca",
+"Modello": "Modello",
+"Prezzo": 0.000000,
+"Quantita": 6,
+"Usata":0,
+"Deck": "Deck",
+"Collarino": "Collarino",
+"Grip": "Grip",
+"Watt": 0,
+"Ampere": 0.000000,
+"Accelleratore": "Accelleratore"
+}
+] 
+ }
