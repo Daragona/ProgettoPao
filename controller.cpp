@@ -1,11 +1,10 @@
 #include <iostream>
 #include "controller.h"
 #include "container.h"
-
+#include "ebike.h"
 #include "mountainbike.h"
 #include "bmx.h"
 #include "monopattinoelettrico.h"
-
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>
@@ -52,45 +51,73 @@ void Controller::importaMezziController()
     for(int i = 0; i < JSONarray.size(); i++){
        QJsonObject arrayObject = JSONarray[i].toObject();
         veicolo *p;
-       if(arrayObject["tipo"] == "Mountain-Bike"){ // crea oggetto mountainbike
+
+       if(arrayObject["Tipo"] == "mountainbike"){ // crea oggetto mountainbike
            p = new mountainbike(
                        arrayObject["Marca"].toString().toStdString()
                      , arrayObject["Modello"].toString().toStdString()
-                     , arrayObject["Price"].toDouble()
-                     , arrayObject["Quantity"].toInt()
-                     , arrayObject["Used"].toBool()
+                     , arrayObject["Prezzo"].toDouble()
+                     , arrayObject["Quantita"].toInt()
+                     , arrayObject["Usata"].toBool()
                      , arrayObject["Telaio"].toString().toStdString()
                      , arrayObject["Manubrio"].toString().toStdString()
                      , arrayObject["Sella"].toString().toStdString()
                      , arrayObject["Corona"].toString().toStdString()
-                     , arrayObject["dimRuote"].toDouble()
-                     , arrayObject["numMarce"].toInt()
+                     , arrayObject["Diametro"].toDouble()
+                     , arrayObject["Marce"].toInt()
                      , arrayObject["Ammortizzatori"].toString().toStdString());
-       }else    if(arrayObject["tipo"] == "BMX"){ // crea oggetto bmx
+       }else    if(arrayObject["Tipo"] == "bmx"){ // crea oggetto bmx
           p= new bmx(
                       arrayObject["Marca"].toString().toStdString()
                     , arrayObject["Modello"].toString().toStdString()
-                    , arrayObject["Price"].toDouble()
-                    , arrayObject["Quantity"].toInt()
-                    , arrayObject["Used"].toBool()
+                    , arrayObject["Prezzo"].toDouble()
+                    , arrayObject["Quantita"].toInt()
+                    , arrayObject["Usata"].toBool()
                     , arrayObject["Telaio"].toString().toStdString()
                     , arrayObject["Manubrio"].toString().toStdString()
                     , arrayObject["Sella"].toString().toStdString()
                     , arrayObject["Corona"].toString().toStdString()
-                    , arrayObject["dimRuote"].toDouble()
+                    , arrayObject["Diametro"].toDouble()
                     , arrayObject["Pad"].toInt());
-      }else if(arrayObject["tipo"] == "E-Bike"){
-           p=nullptr;
-       }else{
-           p=nullptr;
+      }else if(arrayObject["Tipo"] == "ebike"){
+           p= new ebike(
+                       arrayObject["Marca"].toString().toStdString()
+                     , arrayObject["Modello"].toString().toStdString()
+                     , arrayObject["Prezzo"].toDouble()
+                     , arrayObject["Quantita"].toInt()
+                     , arrayObject["Usata"].toBool()
+                     , arrayObject["Telaio"].toString().toStdString()
+                     , arrayObject["Manubrio"].toString().toStdString()
+                     , arrayObject["Sella"].toString().toStdString()
+                     , arrayObject["Corona"].toString().toStdString()
+                     , arrayObject["Diametro"].toDouble()
+                     , arrayObject["Watt"].toInt()
+                     , arrayObject["Ampere"].toDouble()
+                   , arrayObject["Sens. Pedalata"].toString().toStdString()
+                   , arrayObject["Sens. Sforzo"].toString().toStdString());
+
+       }else if(arrayObject["Tipo"] == "monopattinoelettrico"){
+           p = new monopattinoElettrico(
+                arrayObject["Marca"].toString().toStdString()
+                , arrayObject["Modello"].toString().toStdString()
+                , arrayObject["Prezzo"].toDouble()
+                , arrayObject["Quantita"].toInt()
+                , arrayObject["Usata"].toBool()
+                , arrayObject["Deck"].toString().toStdString()
+                , arrayObject["Collarino"].toString().toStdString()
+                , arrayObject["Grip"].toString().toStdString()
+                , arrayObject["Watt"].toInt()
+                , arrayObject["Ampere"].toDouble()
+                , arrayObject["Accelleratore"].toString().toStdString());
        }
+
        deepPtr<veicolo> *ptr=new deepPtr<veicolo>(p);
 
        if(!checkVeicolo(*ptr)){
            delete ptr; //Così non da un warning
              //controlla se esiste un veicolo uguale, se c'è somma le quantità *Nel model* , altrimenti l'aggiunge per la prima volta
            model->addVeicolo(p);
-           viewMezzi->showMezzi(p,arrayObject["tipo"].toString(),arrayObject["Path"].toString());
+           viewMezzi->showMezzi(p,arrayObject["Tipo"].toString(),arrayObject["Path"].toString());
        }
     }
 }
@@ -112,17 +139,26 @@ void Controller::esportaMezziController(){
 
     while(j!=fine){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
         deepPtr<veicolo> z(*j); //Puntatore al veicolo j-esimo
+
+        Container<string> values=z->GetInfoExport();
+
+        Container<string>::Const_Iteratore I;
+        Container<string>::Const_Iteratore fineStringa;
+
         val = "\n{\n";
-        val = val + "\"Marca\": \" " + QString::fromStdString(z->getMarca()) + "\",\n";
-        val = val + "\"Modello\": \" " + QString::fromStdString(z->getModello()) + "\",\n";
-        val = val + "\"Quantita\": \" " + QString::number(z->getQuantita()) + "\",\n";
-        val = val + "\"Prezzo\": \" " + QString::number(z->getPrezzo()) + "\"\n";
+        for(I=values.inizioc(); I!=fineStringa; I++){
+            val = val + QString::fromStdString(*I);
+            if(I != values.finec())
+                val = val + ",\n";
+            else
+                val = val + "\n";
+        }
+
+        //gestisce il caso in cui sia l'ultima parentesi e quindi non deve avere la virgola finale
         if(j != model->veicoli.finec())
             val = val + "},\n";
         else
             val = val + "}\n";
-
-
 
         out << val;
 

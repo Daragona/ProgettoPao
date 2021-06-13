@@ -90,7 +90,8 @@ void qwidgetveicolo::moreInfoSlot(){
 
     Container<string> values=ptrVeicolo->GetInfo();
     Container<string>::Const_Iteratore I;
-    for(I=values.inizioc(); I!=values.finec(); I++){
+    Container<string>::Const_Iteratore fine;
+    for(I=values.inizioc(); I!=fine; I++){
         QLabel *label=new QLabel(QString::fromStdString(*I));
         boxLayout->addWidget(label);
     }

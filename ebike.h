@@ -16,6 +16,7 @@ public:
     string getSforzo() const;
     double calcolaTax() const override;
     Container<string> GetInfo() const override;
+    Container<string> GetInfoExport() const override;
 
 
 };

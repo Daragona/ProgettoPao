@@ -14,6 +14,7 @@ public:
     int getNumMarce();
     string getAmmortizzatori();
     Container<string> GetInfo() const override;
+    Container<string> GetInfoExport() const override;
     double calcolaTax()const override;
 
 };

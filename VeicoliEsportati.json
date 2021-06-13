@@ -1,0 +1,18 @@
+{
+ "arrayMezzi": [
+{
+"Tipo": "monopattinoelettrico",
+"Marca": "Marca",
+"Modello": "Modello",
+"Prezzo": 0.000000,
+"Quantita": 1,
+"Usata":0,
+"Deck": "Deck",
+"Collarino": "Collarino",
+"Grip": "Grip",
+"Watt": 0,
+"Ampere": 0.000000,
+"Accelleratore": "Accelleratore"
+}
+] 
+ }

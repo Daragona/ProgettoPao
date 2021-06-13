@@ -17,6 +17,7 @@ public:
     veicolo(const string&, const string&, const double&, const int&, const bool&);
     veicolo();
     virtual Container<string> GetInfo() const =0;
+    virtual Container<string> GetInfoExport() const =0;
     virtual double calcolaTax()const =0;
     virtual ~veicolo()=default;
     string getModello() const;

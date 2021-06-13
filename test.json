@@ -1,34 +1,18 @@
 {
-"arrayMezzi" : [{
-      "tipo" : "Mountain-Bike",
-      "Sella": "Sella",
-      "Corona": "Corona",
-      "diamRuote": 12.2,
-      "Marca": "Marca",
-      "Modello": "Modello",
-      "Telaio": "Telaio",
-      "Manubrio": "Manubrio",
-      "Price": 1,
-      "Quantity": 1,
-      "Used": 0,
-      "numMarce": 5,
-      "Ammortizzatori": "Ammortizzatori",
-      "Path": "images/mountain-bike1.jpg"
-   },
-   {
-      "tipo" : "BMX",
-      "Sella": "Sella",
-      "Corona": "Corona",
-      "diamRuote": 12.2,
-      "Marca": "Marca2",
-      "Modello": "Modello",
-      "Telaio": "Telaio",
-      "Manubrio": "Manubrio",
-      "Price": 1,
-      "Quantity": 4,
-      "Used": 0,
-      "pad": "PAD bmx",
-      "Path" :"images/bmx1.jpg"
-   }]
-
-}
+   "arrayMezzi": [
+  {
+  "Tipo": "monopattinoelettrico",
+  "Marca": "Marca",
+  "Modello": "Modello",
+  "Prezzo": 0.000000,
+  "Quantita": 1,
+  "Usata":0,
+  "Deck": "Deck",
+  "Collarino": "Collarino",
+  "Grip": "Grip",
+  "Watt": 0,
+  "Ampere": 0.000000,
+  "Accelleratore": "Accelleratore"
+  }
+  ] 
+   }
