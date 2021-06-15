@@ -28,18 +28,10 @@ view::view(QWidget *parent): QWidget(parent) {
     );
 
 
-
-    QMenuBar* menuBar = new QMenuBar(this);
-    QMenu* file = new QMenu("file", menuBar);
-    menuBar->addMenu(file);
-
     QLabel* titoloInventario = new QLabel; // Titolo
     titoloInventario->setFixedHeight(30);
     titoloInventario->setText("<center><h1>INVENTARIO</h1></center>");
     screenLayout->addWidget(titoloInventario,0,0);
-
-    //itemsList(screenLayout);
-    // metodo per creare i box che contengono i mezzi
 
     QLabel* titoloVeicolo = new QLabel;
     QLabel* titoloVeicoloElettrico = new QLabel;

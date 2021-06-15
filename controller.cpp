@@ -27,13 +27,12 @@ void Controller::setView(view* v){viewMezzi = v;}
 void Controller::importaMezziController()
 {
 
-    // INSERIMENTO DA FILE (VEDERE SE TENERLO QUA O SE FARE UN METODO NEL MODEL )
     QString val;
-    QString path ="test.json"; //Risolto così
+    QString path ="file.json";
     QFile fileRead(path);
 
     if(!fileRead.open(QIODevice::ReadOnly | QIODevice::Text)){  // apre il file e controlla se è riuscito ad aprirlo correttamente
-        std::cout << "errore: non si apre i file";
+        //std::cout << "errore: non si apre i file";
         return;
     }
     val = fileRead.readAll(); // legge il file e lo inserisce dentro la QString "val"
@@ -122,20 +121,21 @@ void Controller::importaMezziController()
 
 void Controller::esportaMezziController(){
     QString val;
-    QString path ="test.json"; //Risolto così
+    QString path ="file.json";
     QFile exportFile(path);
 
     exportFile.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&exportFile);   // serve a gestire i flussi di testo siccome il metodo file.write non accetta le stringhe (out << String --> scrive sul file)
 
     val = "{\n \"arrayMezzi\": [";
-    out << val;
 
     Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc();
 
-    Container<deepPtr<veicolo>>::Const_Iteratore fine; // mi serve per simulare null nella condizione
+    Container<deepPtr<veicolo>>::Const_Iteratore fine; // usato per simulare null nella condizione
 
-    while(j!=fine){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
+    while(j!=fine){
+        out << val;
+
         deepPtr<veicolo> z(*j); //Puntatore al veicolo j-esimo
 
         Container<string> values=z->GetInfoExport();
@@ -145,25 +145,24 @@ void Controller::esportaMezziController(){
 
         val = "\n{\n";
         for(I=values.inizioc(); I!=fineStringa; I++){
-            val = val + QString::fromStdString(*I);
+            QString toInsert=QString::fromStdString(*I);
+            toInsert.replace(",", ".");
+
+            val = val + toInsert;
             if(I != values.finec())
                 val = val + ",\n";
             else
                 val = val + "\n";
         }
 
-        //gestisce il caso in cui sia l'ultima parentesi e quindi non deve avere la virgola finale
-        if(j != model->veicoli.finec())
-            val = val + "},\n";
-        else
-            val = val + "}\n";
+        val = val + "},";
 
-        out << val;
 
         j++;
     };
+    val.remove(val.length()-1,1); //rimuove l'ultima virgola :)
 
-    val = "] \n }";
+    val = val+"\n] \n }";
     out << val;
 
     exportFile.close();
@@ -244,7 +243,7 @@ void Controller::createVeicolo(QStringList *Lista){
     }
     deepPtr<veicolo> *ptr=new deepPtr<veicolo>(Nuova);
 
-    if(!checkVeicolo(*ptr)){//Funziona :)
+    if(!checkVeicolo(*ptr)){
         model->addVeicolo(Nuova);
         viewMezzi->showMezzi(*ptr,Tipo,*i++);
         delete ptr;
@@ -256,8 +255,8 @@ void Controller::createVeicolo(QStringList *Lista){
 bool Controller::checkVeicolo(deepPtr<veicolo> &Nuova) const {
     Container<deepPtr<veicolo>>::Const_Iteratore j=model->veicoli.inizioc();
 
-    Container<deepPtr<veicolo>>::Const_Iteratore fine; // mi serve per simulare null nella condizione
-    while(j!=fine){ //Scorre tutti i veicoli all'interno di model->veicoli e vede se ce n'è uno uguale a *Nuova
+    Container<deepPtr<veicolo>>::Const_Iteratore fine; // usato per simulare null nella condizione
+    while(j!=fine){
         deepPtr<veicolo> z(*j); //Puntatore al veicolo j-esimo
         if(*z==*Nuova ){
             z->setQuantita(Nuova->getQuantita()+z->getQuantita()); //somma quantità
